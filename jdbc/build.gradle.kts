@@ -1,4 +1,9 @@
 plugins {
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    kotlin("jvm")
+    kotlin("plugin.spring")
+
     kotlin("plugin.allopen")
     kotlin("plugin.jpa")
 }
@@ -10,6 +15,7 @@ allOpen {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 

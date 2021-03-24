@@ -3,13 +3,13 @@
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
 
-    <changeSet id="install_extension" author="viktor.trunov" dbms="postgresql">
+    <changeSet id="install_extension" author="dyusupov" dbms="postgresql">
         <sql dbms="postgresql">CREATE EXTENSION IF NOT EXISTS "uuid-ossp";</sql>
     </changeSet>
 
     <changeSet id="create table country" author="dyusupov">
         <createTable tableName="country" schemaName="${schema}">
-            <column name="ID" type="UUID" defaultValueComputed="${uuid_function}">
+            <column name="ID" type="BIGINT">
                 <constraints primaryKeyName="country_pkey" primaryKey="true" nullable="false"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">
@@ -20,10 +20,10 @@
 
     <changeSet id="create table city" author="dyusupov">
         <createTable tableName="city" schemaName="${schema}">
-            <column name="ID" type="UUID" defaultValueComputed="${uuid_function}">
+            <column name="ID" type="BIGINT">
                 <constraints primaryKeyName="city_pkey" primaryKey="true" nullable="false"/>
             </column>
-            <column name="COUNTRY_ID" type="UUID">
+            <column name="COUNTRY_ID" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">
