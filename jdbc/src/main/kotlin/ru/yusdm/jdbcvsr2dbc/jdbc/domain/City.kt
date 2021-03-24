@@ -8,10 +8,12 @@ import javax.persistence.*
 @Entity
 @Table(name = "city")
 class City: Persistable<UUID> {
+
     @Id
+    @Column(name = "id")
     val uuid: UUID
 
-    @Column
+    @Column(name = "name")
     val name: String
 
     @ManyToOne

@@ -8,3 +8,12 @@ management:
     web:
       exposure:
         include: prometheus, health
+
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:/dbchangelog/db.changelog-master.xml
+
+  jpa:
+    hibernate:
+      ddl-auto: none

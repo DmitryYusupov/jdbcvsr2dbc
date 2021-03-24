@@ -10,12 +10,6 @@ plugins {
     kotlin("plugin.jpa") version "1.4.10" apply false
 }
 
-//java.sourceCompatibility = JavaVersion.VERSION_14
-
-repositories {
-    mavenCentral()
-}
-
 allprojects {
     group = "ru.yusdm.jdbcvsr2dbc"
     version = "1.0-SNAPSHOT"
@@ -45,38 +39,20 @@ allprojects {
 
 subprojects {
 
-   /* apply {
+    apply {
         plugin("io.spring.dependency-management")
         plugin("org.jetbrains.kotlin.jvm")
         plugin("org.jetbrains.kotlin.plugin.spring")
-    }*/
-
-    repositories {
-        mavenCentral()
+        plugin("org.springframework.boot")
     }
 
-    apply {
-        plugin("io.spring.dependency-management")
-    }
+   /* dependencies {
+        implementation("org.springframework.boot", "spring-boot-starter")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-   /* dependencyManagement {
-        val bootVersion: String by project
-        imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:$bootVersion")
+        testImplementation("org.springframework.boot", "spring-boot-starter-test") {
+            exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
         }
     }*/
-
-//    apply(plugin = "org.jetbrains.kotlin.jvm")
-//    apply(plugin = "org.springframework.boot")
-//    apply(plugin = "plugin.spring")
-
-//    dependencies {
-//        implementation("org.springframework.boot", "spring-boot-starter")
-//        implementation("org.jetbrains.kotlin:kotlin-reflect")
-//        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-//
-//        testImplementation("org.springframework.boot", "spring-boot-starter-test") {
-//            exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-//        }
-//    }
 }

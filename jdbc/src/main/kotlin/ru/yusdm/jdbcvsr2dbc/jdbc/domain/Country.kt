@@ -10,9 +10,10 @@ import javax.persistence.*
 class Country: Persistable<UUID> {
 
     @Id
+    @Column(name = "id")
     val uuid: UUID
 
-    @Column
+    @Column(name = "name")
     val name: String
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country")

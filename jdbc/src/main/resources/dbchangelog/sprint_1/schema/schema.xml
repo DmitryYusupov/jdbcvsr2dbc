@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="install_extension" author="viktor.trunov" dbms="postgresql">
+        <sql dbms="postgresql">CREATE EXTENSION IF NOT EXISTS "uuid-ossp";</sql>
+    </changeSet>
+
+    <changeSet id="create table country" author="dyusupov">
+        <createTable tableName="country" schemaName="${schema}">
+            <column name="ID" type="UUID" defaultValueComputed="${uuid_function}">
+                <constraints primaryKeyName="country_pkey" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create table city" author="dyusupov">
+        <createTable tableName="city" schemaName="${schema}">
+            <column name="ID" type="UUID" defaultValueComputed="${uuid_function}">
+                <constraints primaryKeyName="city_pkey" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="COUNTRY_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_fk_city_country_id" author="dyusupov">
+        <addForeignKeyConstraint baseColumnNames="COUNTRY_ID" baseTableName="city"
+                                 constraintName="fk_city_country_id" deferrable="false" initiallyDeferred="false"
+                                 onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID"
+                                 referencedTableName="country"
+                                 baseTableSchemaName="${schema}"
+                                 referencedTableSchemaName="${schema}"
+        />
+    </changeSet>
+</databaseChangeLog>
