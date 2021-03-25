@@ -16,4 +16,8 @@ class CountryService(
         return countryRepository.getOne(id)
     }
 
+    fun findAllCountries(): List<Country> {
+        return countryRepository.findAll()
+    }
+
 }

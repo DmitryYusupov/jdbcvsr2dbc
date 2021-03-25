@@ -7,6 +7,6 @@ fun City.toDTO(): CityDTO {
     return CityDTO(id, name)
 }
 
-fun Country.toDTO(): CountryDTO {
-    return CountryDTO(id, name, cities.map { it.toDTO() })
+fun Country.toDTO(fetchCities: Boolean = false): CountryDTO {
+    return CountryDTO(id, name, if (fetchCities) cities.map { it.toDTO() } else emptyList())
 }
