@@ -1,0 +1,6 @@
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:/dbchangelog/db.changelog-master.xml
+server:
+  port: 8082
