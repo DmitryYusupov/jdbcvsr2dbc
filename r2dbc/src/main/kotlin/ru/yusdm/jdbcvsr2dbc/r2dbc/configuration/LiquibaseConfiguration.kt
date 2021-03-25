@@ -7,18 +7,20 @@ import liquibase.Liquibase
 import liquibase.database.DatabaseFactory
 import liquibase.database.jvm.JdbcConnection
 import liquibase.resource.ClassLoaderResourceAccessor
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import javax.annotation.PostConstruct
 
-/*
+
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(LiquibaseProperties::class)
-class LiquibaseConfiguration {
+class LiquibaseConfiguration(private val liquibaseProperties: LiquibaseProperties) {
 
     @PostConstruct
-    fun applyChangelog(liquibaseProperties: LiquibaseProperties) {
+    fun applyChangelog() {
         HikariDataSource().apply {
             this.driverClassName = liquibaseProperties.driverClassName
             this.username = liquibaseProperties.user
@@ -38,4 +40,4 @@ class LiquibaseConfiguration {
             liquibase.update(Contexts(), LabelExpression())
         }
     }
-}*/
+}
