@@ -16,6 +16,7 @@ class ApplicationRestController(private val countryService: CountryService) {
 
     @GetMapping("/countries")
     fun getCountries(@RequestParam("fetch_cities") fetchCities: Boolean): List<CountryDTO> {
+        println(Thread.currentThread().name)
         return countryService.findAllCountries().map { it.toDTO(fetchCities) }
     }
 
