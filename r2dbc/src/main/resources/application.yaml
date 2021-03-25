@@ -4,3 +4,12 @@ spring:
     enabled: false
 server:
   port: 8082
+
+
+logging:
+  level:
+    io:
+      r2dbc:
+        h2:
+          H2Connection: DEBUG
+

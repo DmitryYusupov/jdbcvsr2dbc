@@ -8,14 +8,14 @@ import javax.persistence.*
 class City: Persistable<Long> {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "uid")
     val uid: Long
 
     @Column(name = "name")
     val name: String
 
     @ManyToOne
-    @JoinColumn(name = "country_id")
+    @JoinColumn(name = "country_uid")
     private val country: Country
 
     @Transient

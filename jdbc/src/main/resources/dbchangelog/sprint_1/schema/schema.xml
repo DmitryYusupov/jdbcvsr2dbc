@@ -9,7 +9,7 @@
 
     <changeSet id="create table country" author="dyusupov">
         <createTable tableName="country" schemaName="${schema}">
-            <column name="ID" type="BIGINT">
+            <column name="UID" type="BIGINT">
                 <constraints primaryKeyName="country_pkey" primaryKey="true" nullable="false"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">
@@ -20,10 +20,10 @@
 
     <changeSet id="create table city" author="dyusupov">
         <createTable tableName="city" schemaName="${schema}">
-            <column name="ID" type="BIGINT">
+            <column name="UID" type="BIGINT">
                 <constraints primaryKeyName="city_pkey" primaryKey="true" nullable="false"/>
             </column>
-            <column name="COUNTRY_ID" type="BIGINT">
+            <column name="COUNTRY_UID" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="NAME" type="VARCHAR(255)">
@@ -33,9 +33,9 @@
     </changeSet>
 
     <changeSet id="create_fk_city_country_id" author="dyusupov">
-        <addForeignKeyConstraint baseColumnNames="COUNTRY_ID" baseTableName="city"
+        <addForeignKeyConstraint baseColumnNames="COUNTRY_UID" baseTableName="city"
                                  constraintName="fk_city_country_id" deferrable="false" initiallyDeferred="false"
-                                 onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID"
+                                 onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="UID"
                                  referencedTableName="country"
                                  baseTableSchemaName="${schema}"
                                  referencedTableSchemaName="${schema}"

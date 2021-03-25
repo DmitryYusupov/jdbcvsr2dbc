@@ -18,8 +18,8 @@ private fun prepareInitialData(): List<String> {
     val sqls = mutableListOf<String>()
 
     var id = 1
-    for (i in 0..100) {
-        val sql = "INSERT INTO \${schema}.COUNTRY(ID, NAME) VALUES ('$id', 'Country_$id');"
+    for (i in 0 until 100) {
+        val sql = "INSERT INTO \${schema}.COUNTRY(UID, NAME) VALUES ('$id', 'Country_$id');"
         sqls.add(sql)
         countryIds.add(id.toLong())
         id++
@@ -28,7 +28,7 @@ private fun prepareInitialData(): List<String> {
     countryIds.forEachIndexed { index, countryId ->
         for (i in 0..3) {
             val sql =
-                "INSERT INTO \${schema}.CITY(ID, COUNTRY_ID, NAME) VALUES ('${id}', '${countryId}', 'City_${index}_${id}');"
+                "INSERT INTO \${schema}.CITY(UID, COUNTRY_UID, NAME) VALUES ('${id}', '${countryId}', 'City_${index}_${id}');"
             sqls.add(sql)
             id++
         }

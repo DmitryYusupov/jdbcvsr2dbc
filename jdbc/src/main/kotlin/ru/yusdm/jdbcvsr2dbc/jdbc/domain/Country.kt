@@ -8,7 +8,7 @@ import javax.persistence.*
 class Country: Persistable<Long> {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "uid")
     val uid: Long
 
     @Column(name = "name")
