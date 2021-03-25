@@ -17,3 +17,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+logging:
+  level:
+   ru.yusdm.jdbcvsr2dbc: INFO
+   root: WARN

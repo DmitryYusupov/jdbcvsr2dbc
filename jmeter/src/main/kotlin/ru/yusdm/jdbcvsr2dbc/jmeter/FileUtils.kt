@@ -1,4 +1,4 @@
-package ru.yusdm.jdbcvsr2dbc.common.utils
+package ru.yusdm.jdbcvsr2dbc.jmeter
 
 import java.io.File
 import java.nio.file.Files

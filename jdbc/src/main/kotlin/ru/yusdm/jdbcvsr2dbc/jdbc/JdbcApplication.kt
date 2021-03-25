@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import java.util.*
 
 @SpringBootApplication
-class Application
+class JdbcApplication
 
 fun main(args: Array<String>) {
-    SpringApplication.run(Application::class.java, *args)
+    SpringApplication.run(JdbcApplication::class.java, *args)
 //    prepareInitialData().forEach { println(it) }
 }
 

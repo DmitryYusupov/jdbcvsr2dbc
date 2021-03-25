@@ -1,4 +1,4 @@
-package ru.yusdm.jdbcvsr2dbc.common.jmeter
+package ru.yusdm.jdbcvsr2dbc.jmeter
 
 import org.apache.jmeter.protocol.http.control.gui.HttpTestSampleGui
 import org.apache.jmeter.protocol.http.sampler.HTTPSamplerProxy

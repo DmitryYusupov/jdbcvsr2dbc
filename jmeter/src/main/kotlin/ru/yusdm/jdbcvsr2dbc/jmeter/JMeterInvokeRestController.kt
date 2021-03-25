@@ -1,38 +1,39 @@
-package ru.yusdm.jdbcvsr2dbc.jdbc.api
+package ru.yusdm.jdbcvsr2dbc.jmeter
 
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.web.bind.annotation.*
-import ru.yusdm.jdbcvsr2dbc.common.jmeter.JMeterGetRequest
-import ru.yusdm.jdbcvsr2dbc.common.jmeter.JMeterTestRunner
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping(value = ["/api/jmeter"])
-class JMeterInvokeRestController(@Value("\${server.port}") private val serverPort: Int) {
+class JMeterInvokeRestController() {
 
-    @GetMapping("/countries/{countryId}")
-    fun getCountry(@PathVariable("countryId") countryId: Long) {
-
-        JMeterTestRunner.runSuiteForGetRequest(
-            JMeterGetRequest(
-                host = "localhost",
-                port = serverPort,
-                numThreads = 2,
-                path = "/api/countries",
-                params = mapOf("fetch_cities" to "false")
-            )
-        )
-
-    }
-
-    @GetMapping("/countries")
-    fun getCountries(
+    @GetMapping("/jdbc/countries")
+    fun getCountriesWithJdbc(
         @RequestParam("fetch_cities") fetchCities: Boolean,
         @RequestParam("num_threads") numThreads: Int
     ) {
         JMeterTestRunner.runSuiteForGetRequest(
             JMeterGetRequest(
                 host = "localhost",
-                port = serverPort,
+                port = 8081,
+                numThreads = numThreads,
+                path = "/api/countries",
+                params = mapOf("fetch_cities" to "false")
+            )
+        )
+    }
+
+    @GetMapping("/r2dbc/countries")
+    fun getCountriesWithR2Dbc(
+        @RequestParam("fetch_cities") fetchCities: Boolean,
+        @RequestParam("num_threads") numThreads: Int
+    ) {
+        JMeterTestRunner.runSuiteForGetRequest(
+            JMeterGetRequest(
+                host = "localhost",
+                port = 8082,
                 numThreads = numThreads,
                 path = "/api/countries",
                 params = mapOf("fetch_cities" to "false")

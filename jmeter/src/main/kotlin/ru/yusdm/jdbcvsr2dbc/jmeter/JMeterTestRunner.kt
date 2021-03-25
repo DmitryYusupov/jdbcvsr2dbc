@@ -1,4 +1,4 @@
-package ru.yusdm.jdbcvsr2dbc.common.jmeter
+package ru.yusdm.jdbcvsr2dbc.jmeter
 
 import org.apache.jmeter.config.Arguments
 import org.apache.jmeter.config.gui.ArgumentsPanel
@@ -12,7 +12,6 @@ import org.apache.jmeter.threads.ThreadGroup
 import org.apache.jmeter.threads.gui.ThreadGroupGui
 import org.apache.jmeter.util.JMeterUtils
 import org.apache.jorphan.collections.HashTree
-import ru.yusdm.jdbcvsr2dbc.common.utils.FileUtils
 
 
 object JMeterTestRunner {
