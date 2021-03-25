@@ -1,3 +1,4 @@
 How to run jmeter from code: https://bitbucket.org/blazemeter/jmeter-from-code/src/master/
 
 http://localhost:8080/api/jmeter/jdbc/countries?fetch_cities=false&num_threads=10000
+https://medium.com/@codeidoscope/load-testing-and-improving-the-performance-of-my-http-server-ab6ff70ced60
