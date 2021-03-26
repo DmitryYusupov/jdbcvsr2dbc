@@ -1,5 +1,7 @@
 package ru.yusdm.jdbcvsr2dbc.common.dto
 
-data class CityDTO(val id: Long, val name: String)
+import java.util.*
 
-data class CountryDTO(val id: Long, val name: String, val cities: List<CityDTO> = listOf())
+data class CityDTO(val id: UUID, val name: String)
+
+data class CountryDTO(val id: UUID, val name: String, val cities: List<CityDTO> = listOf())

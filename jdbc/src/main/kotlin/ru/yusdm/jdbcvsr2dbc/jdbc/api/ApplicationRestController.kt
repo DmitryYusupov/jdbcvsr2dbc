@@ -13,9 +13,9 @@ class ApplicationRestController(private val countryService: CountryService) {
 
     private val counter = AtomicInteger(0)
 
-    @GetMapping("/countries/{countryId}")
-    fun getCountry(@PathVariable("countryId") countryId: Long): Country {
-        return countryService.getCountryById(countryId)
+    @GetMapping("/ping")
+    fun getCountry(@PathVariable("countryId") countryId: Long) {
+
     }
 
     @GetMapping("/countries")

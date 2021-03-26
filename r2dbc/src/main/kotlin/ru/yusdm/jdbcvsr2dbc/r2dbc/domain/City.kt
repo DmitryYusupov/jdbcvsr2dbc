@@ -2,19 +2,20 @@ package ru.yusdm.jdbcvsr2dbc.r2dbc.domain
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.domain.Persistable
+import java.util.*
 
-class City: Persistable<Long> {
+class City: Persistable<UUID> {
 
     @Id
-    val uid: Long
+    val uid: UUID
 
     val name: String
 
     @Transient
     private var _isNew: Boolean
 
-    constructor(uid: Long, name: String) {
-        this.uid = uid
+    constructor(name: String) {
+        this.uid = UUID.randomUUID()
         this.name = name
         this._isNew = true
     }

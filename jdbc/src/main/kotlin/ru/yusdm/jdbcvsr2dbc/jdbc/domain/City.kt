@@ -1,15 +1,16 @@
 package ru.yusdm.jdbcvsr2dbc.jdbc.domain
 
 import org.springframework.data.domain.Persistable
+import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "city")
-class City: Persistable<Long> {
+class City: Persistable<UUID> {
 
     @Id
     @Column(name = "uid")
-    val uid: Long
+    val uid: UUID
 
     @Column(name = "name")
     val name: String
@@ -21,8 +22,8 @@ class City: Persistable<Long> {
     @Transient
     private var _isNew: Boolean
 
-    constructor(uid: Long, name: String, country: Country) {
-        this.uid = uid
+    constructor(name: String, country: Country) {
+        this.uid = UUID.randomUUID()
         this.country = country
         this.name = name
         this._isNew = true
