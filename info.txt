@@ -3,3 +3,6 @@ How to run jmeter from code: https://bitbucket.org/blazemeter/jmeter-from-code/s
 http://localhost:8080/api/jmeter/jdbc/countries?fetch_cities=false&num_threads=10000
 https://medium.com/@codeidoscope/load-testing-and-improving-the-performance-of-my-http-server-ab6ff70ced60
 https://medium.com/swlh/comparing-webflux-and-spring-mvc-with-jmeter-79dc134c3c04
+
+system.cpu.usage -- The recent cpu usage for the whole system
+process.cpu.usage -- The recent cpu usage for the Java Virtual Machine process

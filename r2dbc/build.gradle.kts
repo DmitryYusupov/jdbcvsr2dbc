@@ -8,6 +8,10 @@ plugins {
 dependencies {
     implementation(project(":common"))
     implementation("org.springframework.boot", "spring-boot-starter")
+
+    implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.liquibase:liquibase-core")

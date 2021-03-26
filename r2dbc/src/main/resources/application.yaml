@@ -6,6 +6,17 @@ server:
   port: 8082
 
 
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
+
 logging:
   level:
     io:
