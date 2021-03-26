@@ -16,6 +16,9 @@ class Country: Persistable<UUID> {
     @Transient
     private var _isNew: Boolean
 
+    @Transient
+    val cities: MutableList<City> = mutableListOf()
+
     @PersistenceConstructor
     constructor( name: String) {
         this.uid = UUID.randomUUID()

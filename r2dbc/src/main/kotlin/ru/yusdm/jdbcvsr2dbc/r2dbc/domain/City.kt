@@ -9,13 +9,16 @@ class City: Persistable<UUID> {
     @Id
     val uid: UUID
 
+    val countryId: UUID
+
     val name: String
 
     @Transient
     private var _isNew: Boolean
 
-    constructor(name: String) {
+    constructor(countryId: UUID, name: String) {
         this.uid = UUID.randomUUID()
+        this.countryId = countryId
         this.name = name
         this._isNew = true
     }

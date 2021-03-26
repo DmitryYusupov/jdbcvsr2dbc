@@ -35,7 +35,7 @@
     <changeSet id="create_fk_city_country_id" author="dyusupov">
         <addForeignKeyConstraint baseColumnNames="COUNTRY_UID" baseTableName="city"
                                  constraintName="fk_city_country_id" deferrable="false" initiallyDeferred="false"
-                                 onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="UID"
+                                 onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="UID"
                                  referencedTableName="country"
                                  baseTableSchemaName="${schema}"
                                  referencedTableSchemaName="${schema}"

@@ -15,7 +15,7 @@ class Country: Persistable<UUID> {
     @Column(name = "name")
     val name: String
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = [CascadeType.PERSIST])
     val cities: MutableList<City>
 
     @Transient

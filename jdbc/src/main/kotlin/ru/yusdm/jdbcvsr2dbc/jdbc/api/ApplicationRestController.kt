@@ -15,7 +15,11 @@ class ApplicationRestController(private val countryService: CountryService) {
 
     @GetMapping("/ping")
     fun getCountry(@PathVariable("countryId") countryId: Long) {
+    }
 
+    @PostMapping("/countries")
+    fun createCountry(): Country {
+        return countryService.createCountry()
     }
 
     @GetMapping("/countries")
