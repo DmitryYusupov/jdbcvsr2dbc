@@ -24,7 +24,7 @@ class City : Persistable<UUID> {
         this.uid = UUID.randomUUID()
         this.countryUID = countryUID
         this.name = name
-        this._isNew = false
+        this._isNew = true
     }
 
     @PersistenceConstructor
@@ -32,7 +32,7 @@ class City : Persistable<UUID> {
         this.uid = uid
         this.countryUID = countryUID
         this.name = name
-        this._isNew = true
+        this._isNew = false
     }
 
     override fun getId() = this.uid
