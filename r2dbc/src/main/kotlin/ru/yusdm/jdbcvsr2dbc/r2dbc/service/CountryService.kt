@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.toFlux
 import reactor.kotlin.core.publisher.toMono
 import ru.yusdm.jdbcvsr2dbc.r2dbc.domain.City
 import ru.yusdm.jdbcvsr2dbc.r2dbc.domain.Country
@@ -35,20 +36,28 @@ class CountryService(
     }
 
     fun createCountry(): Mono<Country> {
-        val country = Country("New Country")
-        val result = countryRepository.save(country)
+        val country = createNewCountry()
 
-        result.flatMapMany {
-            Flux.just(
-                City(it.id, "City_1"),
-                City(it.id, "City_2"),
-                City(it.id, "City_3"),
-                City(it.id, "City_4"),
-            )
-        }.map {
-            cityRepository.save(it)
+         return countryRepository.save(country).flatMap {
+            it.cities.toFlux().map {
+                cityRepository.save(it)
+            }
+             Mono.just(it)
         }
-
-        return result
     }
+
+    private fun createNewCountry(): Country {
+        val country = Country("New Country")
+        val countryId = country.id
+        val cities = listOf(
+            City(countryId, "City_1"),
+            City(countryId, "City_2"),
+            City(countryId, "City_3"),
+            City(countryId, "City_4"),
+        )
+        country.cities.addAll(cities);
+
+        return country
+    }
+
 }

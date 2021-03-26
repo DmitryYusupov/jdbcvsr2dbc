@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.yusdm.jdbcvsr2dbc.jdbc.domain.City
 import ru.yusdm.jdbcvsr2dbc.jdbc.domain.Country
 import ru.yusdm.jdbcvsr2dbc.jdbc.repository.CountryRepository
+import java.util.*
 
 @Service
 @Transactional
@@ -14,6 +15,15 @@ class CountryService(
 
     fun findAllCountries(): List<Country> {
         return countryRepository.findAll()
+    }
+
+    fun getCountryById(countryId: UUID): Country {
+        val country =  countryRepository.findById(countryId).map {
+            it.cities.size
+            it
+        }.get()!!
+
+        return country
     }
 
     fun createCountry(): Country {
@@ -32,9 +42,9 @@ class CountryService(
             City("City_3", country),
             City("City_4", country),
         )
-       country.cities.addAll(cities);
+        country.cities.addAll(cities);
 
-       return country
+        return country
     }
 
 }
