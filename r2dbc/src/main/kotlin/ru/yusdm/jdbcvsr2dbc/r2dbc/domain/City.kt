@@ -20,19 +20,19 @@ class City : Persistable<UUID> {
     @Transient
     private var _isNew: Boolean
 
-    @PersistenceConstructor
     constructor(countryUID: UUID, name: String) {
         this.uid = UUID.randomUUID()
         this.countryUID = countryUID
         this.name = name
-        this._isNew = true
+        this._isNew = false
     }
 
+    @PersistenceConstructor
     constructor(uid: UUID, countryUID: UUID, name: String) {
         this.uid = uid
         this.countryUID = countryUID
         this.name = name
-        this._isNew = false
+        this._isNew = true
     }
 
     override fun getId() = this.uid
