@@ -26,6 +26,16 @@ class ApplicationRestController(
         return countryService.getCountryById(countryId)
     }
 
+    @PutMapping("/countries")
+    fun updateRandomCountry(): Mono<Country> {
+        return countryService.updateRandom()
+    }
+
+    @DeleteMapping("/countries")
+    fun deleteRandomCountry(): Mono<UUID> {
+        return countryService.deleteRandom()
+    }
+
     @GetMapping("/cities/{cityId}")
     fun getCity(@PathVariable("cityId") cityId: UUID): Mono<City> {
         return cityService.getById(cityId)

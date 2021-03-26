@@ -53,9 +53,30 @@ class CountryService(
             City(countryId, "City_3"),
             City(countryId, "City_4"),
         )
-        country.cities.addAll(cities);
+        country.cities.addAll(cities)
 
         return country
+    }
+
+    fun deleteRandom(): Mono<UUID> {
+        return countryRepository.getAllIds().collectList().flatMap {
+            val countryToDelete = it.random()
+            countryRepository.deleteById(countryToDelete).thenReturn(countryToDelete)
+        }
+    }
+
+    fun updateRandom(): Mono<Country> {
+        return countryRepository.getAllIds().collectList().flatMap {
+            countryRepository.findById(it.random()).flatMap { country->
+                country.name = "Updated country name ${country.uid}"
+                Mono.just(country)
+            }.flatMap { countryRepository.save(it) }.flatMap { country->
+                cityRepository.findAllByCountryUID(country.uid).collectList().map {
+                    country.cities.addAll(it)
+                    country
+                }
+            }
+        }
     }
 
 }

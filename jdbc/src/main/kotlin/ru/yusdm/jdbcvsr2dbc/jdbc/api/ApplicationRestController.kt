@@ -29,6 +29,16 @@ class ApplicationRestController(
         return countryService.getCountryById(countryId)
     }
 
+    @DeleteMapping("/countries")
+    fun deleteRandomCountry(): UUID {
+        return countryService.deleteRandom()
+    }
+
+    @PutMapping("/countries")
+    fun updateRandomCountry(): Country {
+        return countryService.updateRandom()
+    }
+
     @PostMapping("/countries")
     fun createCountry(): Country {
         return countryService.createCountry()

@@ -13,7 +13,7 @@ class Country: Persistable<UUID> {
     val uid: UUID
 
     @Column(name = "name")
-    val name: String
+    var name: String
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = [CascadeType.PERSIST])
     val cities: MutableList<City>
