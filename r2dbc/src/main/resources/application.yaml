@@ -17,10 +17,14 @@ management:
       exposure:
         include: prometheus, health
 
+#logging:
+#  level:
+#    io:
+#      r2dbc:
+#        h2:
+#          H2Connection: DEBUG
 logging:
   level:
     io:
       r2dbc:
-        h2:
-          H2Connection: DEBUG
-
+        h2: DEBUG

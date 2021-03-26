@@ -22,7 +22,7 @@ class CountryService(
     fun getCountryById(id: UUID): Mono<Country> {
         return Mono.zip(
             countryRepository.findById(id),
-            cityRepository.findAllByCountryId(id).collectList()
+            cityRepository.findAllByCountryUID(id).collectList()
         ) { country, cities ->
             country.cities.addAll(cities)
 
@@ -35,7 +35,7 @@ class CountryService(
     }
 
     fun createCountry(): Mono<Country> {
-        val country = createNewCountry()
+        val country = Country("New Country")
         val result = countryRepository.save(country)
 
         result.flatMapMany {
@@ -51,14 +51,4 @@ class CountryService(
 
         return result
     }
-
-    private fun createNewCountry(): Country {
-        val country = Country("New Country")
-        val countryId = country.id
-
-        val cities =
-
-            return country
-    }
-
 }

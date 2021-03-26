@@ -7,5 +7,5 @@ import java.util.*
 
 interface CityRepository : ReactiveCrudRepository<City, UUID> {
 
-    fun findAllByCountryId(countryId: UUID): Flux<City>
+    fun findAllByCountryUID(countryUID: UUID): Flux<City>
 }
