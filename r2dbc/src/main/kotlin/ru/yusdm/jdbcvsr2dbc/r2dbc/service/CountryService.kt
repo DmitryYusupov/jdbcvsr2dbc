@@ -37,12 +37,10 @@ class CountryService(
 
     fun createCountry(): Mono<Country> {
         val country = createNewCountry()
-
-         return countryRepository.save(country).flatMap {
-            it.cities.toFlux().map {
+        return countryRepository.save(country).flatMap {
+            it.cities.toFlux().flatMap {
                 cityRepository.save(it)
-            }
-             Mono.just(it)
+            }.then(Mono.just(it))
         }
     }
 

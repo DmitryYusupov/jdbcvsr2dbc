@@ -7,3 +7,5 @@ https://medium.com/swlh/comparing-webflux-and-spring-mvc-with-jmeter-79dc134c3c0
 system.cpu.usage -- The recent cpu usage for the whole system
 process.cpu.usage -- The recent cpu usage for the Java Virtual Machine process
 https://stackoverflow.com/questions/59841705/obtaining-a-nested-objects-using-spring-data-r2dbc
+https://stackoverflow.com/questions/51235724/how-to-save-object-to-reactive-repository-inside-flux
+https://nikeshshetty.medium.com/5-common-mistakes-of-webflux-novices-f8eda0cd6291
