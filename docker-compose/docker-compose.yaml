@@ -3,10 +3,9 @@ version: '3.7'
 services:
   grafana:
     build: './config/grafana'
+    container_name: monitoring_grafana
     ports:
       - 3000:3000
-    volumes:
-      - ./grafana:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
@@ -15,12 +14,10 @@ services:
         aliases:
           - grafana
   prometheus:
-    image: prom/prometheus
+    build: './config/prometheus'
+    container_name: monitoring_prometheus
     ports:
       - 9090:9090
-    volumes:
-      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus:/prometheus
     networks:
       monitoring:
         aliases:
