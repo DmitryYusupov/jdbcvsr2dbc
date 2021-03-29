@@ -43,7 +43,7 @@ class ApplicationRestController(
 
     @GetMapping("/countries")
     fun getCountries(@RequestParam("fetch_cities") fetchCities: Boolean): Flux<Country> {
-        return countryService.findAllCountries().doOnComplete { counter.incrementAndGet() }
+        return countryService.findAllCountries()
     }
 
     @PostMapping("/countries")

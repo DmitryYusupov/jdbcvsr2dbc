@@ -9,3 +9,6 @@ process.cpu.usage -- The recent cpu usage for the Java Virtual Machine process
 https://stackoverflow.com/questions/59841705/obtaining-a-nested-objects-using-spring-data-r2dbc
 https://stackoverflow.com/questions/51235724/how-to-save-object-to-reactive-repository-inside-flux
 https://nikeshshetty.medium.com/5-common-mistakes-of-webflux-novices-f8eda0cd6291
+
+https://jmeter.apache.org/usermanual/realtime-results.html
+https://grafana.com/grafana/dashboards/5496

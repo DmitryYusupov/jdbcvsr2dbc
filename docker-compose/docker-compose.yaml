@@ -26,5 +26,21 @@ services:
       monitoring:
         aliases:
           - prometheus
+  influxdb:
+    build: './config/influxdb'
+    container_name: monitoring_influxdb
+    environment:
+      - INFLUXDB_DB=jmeter
+    ports:
+      - 8086:8086
+      - 8088:8088
+      - 2003:2003
+    volumes:
+      - ./volumes/influxdb:/var/lib/influxdb
+    networks:
+      monitoring:
+        aliases:
+          - influxdb
+
 networks:
   monitoring:
