@@ -14,7 +14,7 @@ management:
 
 spring:
   liquibase:
-    enabled: false
+    enabled: true
     change-log: classpath:/dbchangelog/db.changelog-master.xml
 
   jpa:
