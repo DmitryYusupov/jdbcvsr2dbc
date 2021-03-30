@@ -34,6 +34,11 @@ class ApplicationRestController(
         return countryService.updateRandom()
     }
 
+    @PostMapping("/countries_with_cities")
+    fun createCountryWithCities(): Country {
+        return countryService.createCountryWithCities()
+    }
+
     @PostMapping("/countries")
     fun createCountry(): Country {
         return countryService.createCountry()

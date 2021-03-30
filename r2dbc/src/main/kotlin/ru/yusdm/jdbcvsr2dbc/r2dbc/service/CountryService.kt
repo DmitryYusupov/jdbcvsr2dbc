@@ -35,13 +35,17 @@ class CountryService(
         return countryRepository.findAll()
     }
 
-    fun createCountry(): Mono<Country> {
+    fun createCountryWithCities(): Mono<Country> {
         val country = createNewCountry()
         return countryRepository.save(country).flatMap {
             it.cities.toFlux().flatMap {
                 cityRepository.save(it)
             }.then(Mono.just(it))
         }
+    }
+
+    fun createCountry(): Mono<Country> {
+        return countryRepository.save(Country("New Country"))
     }
 
     private fun createNewCountry(): Country {

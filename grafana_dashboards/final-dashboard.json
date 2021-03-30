@@ -77,8 +77,8 @@
   "editable": true,
   "gnetId": 4026,
   "graphTooltip": 0,
-  "id": 34,
-  "iteration": 1617107698093,
+  "id": 36,
+  "iteration": 1617109344536,
   "links": [],
   "panels": [
     {
@@ -249,7 +249,16 @@
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
+          "decimals": 0,
+          "mappings": [
+            {
+              "id": 0,
+              "op": "=",
+              "text": "0",
+              "type": 1,
+              "value": "null"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -269,22 +278,22 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 7,
+        "w": 10,
         "x": 8,
         "y": 1
       },
-      "id": 28,
+      "id": 40,
       "interval": "[[send_interval]]s",
       "links": [],
       "maxDataPoints": 100,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "sum"
           ],
           "fields": "",
           "values": false
@@ -311,6 +320,7 @@
               "type": "fill"
             }
           ],
+          "measurement": "jmeter",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT sum(\"count\") FROM \"$measurement_name\" WHERE (\"application\" =~ /^$application$/ AND \"transaction\" =~ /^$transaction$/ AND \"statut\" = 'ko') AND $timeFilter GROUP BY time($__interval) fill(null)",
@@ -321,79 +331,32 @@
             [
               {
                 "params": [
-                  "value"
+                  "count"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               }
             ]
           ],
-          "tags": []
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Failed Requests $transaction",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "$data_source",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
+          "tags": [
+            {
+              "key": "transaction",
+              "operator": "=~",
+              "value": "/^$transaction$/"
+            },
+            {
+              "condition": "AND",
+              "key": "statut",
+              "operator": "=",
+              "value": "ko"
+            }
+          ]
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 7,
-        "x": 15,
-        "y": 1
-      },
-      "id": 38,
-      "interval": "[[send_interval]]s",
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.0",
-      "targets": [
         {
-          "alias": "$transaction",
+          "alias": "$transaction_2",
           "dsType": "influxdb",
           "groupBy": [
             {
@@ -409,32 +372,44 @@
               "type": "fill"
             }
           ],
+          "hide": false,
+          "measurement": "jmeter",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT sum(\"count\") FROM \"$measurement_name\" WHERE (\"application\" =~ /^$application$/ AND \"transaction\" =~ /^$transaction_2$/ AND \"statut\" = 'ko') AND $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
-          "refId": "A",
+          "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "value"
+                  "count"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "transaction",
+              "operator": "=~",
+              "value": "/^$transaction$/"
+            },
+            {
+              "condition": "AND",
+              "key": "statut",
+              "operator": "=",
+              "value": "ko"
+            }
+          ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Failed Requests $transaction_2",
+      "title": "Failed Requests",
       "type": "stat"
     },
     {
@@ -482,6 +457,30 @@
           "unit": "ms"
         },
         "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "r2dbc_get_all_countries_without_cities"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "graph": true,
+                  "legend": false,
+                  "tooltip": false
+                }
+              }
+            ]
+          },
           {
             "matcher": {
               "id": "byName",
@@ -1266,6 +1265,110 @@
       "type": "row"
     },
     {
+      "columns": [],
+      "datasource": "$data_source",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "id": 41,
+      "interval": "[[send_interval]]s",
+      "links": [],
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "align": "auto",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "hidden"
+        },
+        {
+          "alias": "",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 0,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "alias": "$tag_responseCode",
+          "dsType": "influxdb",
+          "groupBy": [
+            {
+              "params": [
+                "responseCode"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "jmeter",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT sum(\"count\") FROM \"$measurement_name\" WHERE (\"application\" =~ /^$application$/ AND \"responseCode\" !~ /^$/) AND $timeFilter GROUP BY \"responseCode\",\"responseMessage\",   \"transaction\"",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "count"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "responseMessage"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "application",
+              "operator": "=~",
+              "value": "/^$application$/"
+            },
+            {
+              "condition": "AND",
+              "key": "responseCode",
+              "operator": "!~",
+              "value": "/^$/"
+            }
+          ]
+        }
+      ],
+      "title": "Error Info",
+      "transform": "table",
+      "type": "table-old"
+    },
+    {
       "cacheTimeout": null,
       "colorBackground": false,
       "colorValue": true,
@@ -1294,7 +1397,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 48
+        "y": 55
       },
       "id": 9,
       "interval": "[[send_interval]]s",
@@ -1426,7 +1529,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 48
+        "y": 55
       },
       "id": 6,
       "interval": "[[send_interval]]s",
@@ -1558,7 +1661,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 48
+        "y": 55
       },
       "id": 8,
       "interval": "[[send_interval]]s",
@@ -1802,7 +1905,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 55
+        "y": 62
       },
       "id": 10,
       "interval": "[[send_interval]]s",
@@ -1966,7 +2069,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 55
+        "y": 62
       },
       "id": 32,
       "interval": "[[send_interval]]s",
@@ -2171,7 +2274,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -2201,5 +2304,5 @@
   },
   "timezone": "browser",
   "title": "JDBC vs R2DBC",
-  "version": 15
+  "version": 4
 }

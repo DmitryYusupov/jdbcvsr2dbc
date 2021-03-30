@@ -16,12 +16,12 @@ class Country: Persistable<UUID> {
     var name: String
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = [CascadeType.PERSIST])
-    val cities: MutableList<City>
+    val cities: MutableList<City>?
 
     @Transient
     private var _isNew: Boolean
 
-    constructor(name: String, cities: MutableList<City>) {
+    constructor(name: String, cities: MutableList<City>?) {
         this.uid = UUID.randomUUID()
         this.name = name
         this.cities = cities

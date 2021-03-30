@@ -17,6 +17,8 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     implementation("com.zaxxer:HikariCP:3.4.5")
 
+    runtimeOnly("org.postgresql:postgresql")
+    implementation("io.r2dbc:r2dbc-postgresql")
     runtimeOnly("io.r2dbc:r2dbc-h2")
     runtimeOnly("com.h2database:h2")
 

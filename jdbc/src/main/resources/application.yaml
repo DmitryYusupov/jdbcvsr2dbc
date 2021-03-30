@@ -14,14 +14,14 @@ management:
 
 spring:
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:/dbchangelog/db.changelog-master.xml
 
   jpa:
     hibernate:
       ddl-auto: none
 
-logging:
-  level:
-   ru.yusdm.jdbcvsr2dbc: WARN
-   root: WARN
+#logging:
+#  level:
+#   ru.yusdm.jdbcvsr2dbc: WARN
+#   root: WARN

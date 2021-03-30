@@ -19,15 +19,19 @@ class CountryService(
 
     fun getCountryById(countryId: UUID): Country {
         val country =  countryRepository.findById(countryId).map {
-            it.cities.size
+            it.cities?.size
             it
         }.get()
 
         return country
     }
 
-    fun createCountry(): Country {
+    fun createCountryWithCities(): Country {
         return countryRepository.save(createNewCountry())
+    }
+
+    fun createCountry(): Country {
+        return countryRepository.save(Country("New Country", null))
     }
 
     fun deleteRandom(): UUID {
@@ -46,7 +50,7 @@ class CountryService(
             City("City_3", country),
             City("City_4", country),
         )
-        country.cities.addAll(cities);
+        country.cities!!.addAll(cities);
 
         return country
     }

@@ -23,8 +23,8 @@ management:
 #      r2dbc:
 #        h2:
 #          H2Connection: DEBUG
-logging:
-  level:
-    io:
-      r2dbc:
-        h2: WARN
+#logging:
+#  level:
+#    io:
+#      r2dbc:
+#        h2: WARN

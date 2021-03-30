@@ -1,8 +1,8 @@
 spring:
   datasource:
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/jdbc_vs_r2dbc
+    username: test
+    password: 111
   jpa:
     show-sql: false
