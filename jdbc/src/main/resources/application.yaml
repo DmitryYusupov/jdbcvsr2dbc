@@ -23,5 +23,5 @@ spring:
 
 logging:
   level:
-   ru.yusdm.jdbcvsr2dbc: INFO
+   ru.yusdm.jdbcvsr2dbc: WARN
    root: WARN

@@ -1,4 +1,61 @@
 {
+  "__inputs": [
+    {
+      "name": "JMETER_DASHBOARD",
+      "label": "DB name",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    },
+    {
+      "name": "VAR_MEASUREMENT_NAME",
+      "type": "constant",
+      "label": "Measurement name",
+      "value": "jmeter",
+      "description": "InfluxDB measurement name"
+    },
+    {
+      "name": "VAR_SEND_INTERVAL",
+      "type": "constant",
+      "label": "Backend send interval",
+      "value": "5",
+      "description": "in second"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.6.2"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.4.0"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
+
   "annotations": {
     "list": [
       {

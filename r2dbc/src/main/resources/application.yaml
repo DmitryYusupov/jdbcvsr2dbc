@@ -27,4 +27,4 @@ logging:
   level:
     io:
       r2dbc:
-        h2: DEBUG
+        h2: WARN
