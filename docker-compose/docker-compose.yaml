@@ -6,13 +6,18 @@ services:
 #    image: influxdb:1.8.4
     container_name: monitoring_influxdb
     ports:
-      - '8086:8086'
+      - 8086:8086
+      - 2003:2003
+    networks:
+      monitoring:
+        aliases:
+          - influxdb
     volumes:
       - influxdb-storage:/var/lib/influxdb
     environment:
       - INFLUXDB_DB=jmeter
-      - INFLUXDB_ADMIN_USER=admin
-      - INFLUXDB_ADMIN_PASSWORD=admin
+#      - INFLUXDB_ADMIN_USER=admin
+#      - INFLUXDB_ADMIN_PASSWORD=admin
   chronograf:
     image: chronograf:1.8
     container_name: monitoring_chronograf
@@ -20,12 +25,16 @@ services:
       - 8888:8888
     volumes:
       - chronograf-storage:/var/lib/chronograf
+    networks:
+      monitoring:
+        aliases:
+          - chronograf
     depends_on:
       - influxdb
     environment:
       - INFLUXDB_URL=http://influxdb:8086
-      - INFLUXDB_USERNAME=admin
-      - INFLUXDB_PASSWORD=admin
+#      - INFLUXDB_USERNAME=admin
+#      - INFLUXDB_PASSWORD=admin
   grafana:
     build: './config/grafana'
     container_name: monitoring_grafana
@@ -35,9 +44,6 @@ services:
       - 3000:3000
     volumes:
       - grafana-storage:/var/lib/grafana
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
     networks:
       monitoring:
         aliases:
