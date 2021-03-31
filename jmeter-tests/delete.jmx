@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="test_insert" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="test_delete" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
@@ -459,7 +459,7 @@
           </elementProp>
           <elementProp name="application" elementType="Argument">
             <stringProp name="Argument.name">application</stringProp>
-            <stringProp name="Argument.value">app_update</stringProp>
+            <stringProp name="Argument.value">app_delete</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
