@@ -1,0 +1,3 @@
+#docker volume prune
+docker container rm monitoring_grafana monitoring_prometheus monitoring_influxdb postgres_jdbc postgres_r2dbc monitoring_chronograf
+docker volume rm docker-compose_chronograf-storage docker-compose_grafana-storage docker-compose_influxdb-storage docker-compose_pg-jdbc-storage docker-compose_pg-r2dbc-storage  docker-compose_prometheus-storage

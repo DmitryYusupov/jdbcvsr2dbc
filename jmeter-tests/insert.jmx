@@ -12,13 +12,13 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insert_jdbc_high" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insert_jdbc_high_${thread_group_postfix}" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${iterations_number}</stringProp>
+          <stringProp name="LoopController.loops">${number_of_iterations}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${requests_per_loop}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${number_of_threads}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${ramp_up_seconds}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
@@ -218,13 +218,13 @@
         </BackendListener>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insert_r2dbc_high" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="insert_r2dbc_${thread_group_postfix}" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">${iterations_number}</stringProp>
+          <stringProp name="LoopController.loops">${number_of_iterations}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${requests_per_loop}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${number_of_threads}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${ramp_up_seconds}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
@@ -456,19 +456,24 @@
             <stringProp name="Argument.value">8082</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="requests_per_loop" elementType="Argument">
-            <stringProp name="Argument.name">requests_per_loop</stringProp>
-            <stringProp name="Argument.value">400</stringProp>
+          <elementProp name="number_of_threads" elementType="Argument">
+            <stringProp name="Argument.name">number_of_threads</stringProp>
+            <stringProp name="Argument.value">${__P(number_of_threads,10)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="iterations_number" elementType="Argument">
-            <stringProp name="Argument.name">iterations_number</stringProp>
-            <stringProp name="Argument.value">40</stringProp>
+          <elementProp name="number_of_iterations" elementType="Argument">
+            <stringProp name="Argument.name">number_of_iterations</stringProp>
+            <stringProp name="Argument.value">${__P(number_of_iterations,1)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ramp_up_seconds" elementType="Argument">
             <stringProp name="Argument.name">ramp_up_seconds</stringProp>
-            <stringProp name="Argument.value">10</stringProp>
+            <stringProp name="Argument.value">${__P(ramp_up_seconds,2)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="thread_group_postfix" elementType="Argument">
+            <stringProp name="Argument.name">thread_group_postfix</stringProp>
+            <stringProp name="Argument.value">${__P(thread_group_postfix,2)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>

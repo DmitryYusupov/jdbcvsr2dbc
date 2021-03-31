@@ -1,0 +1,15 @@
+jmeter -n -t insert.jmx -Jthread_group_postfix=low -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+jmeter -n -t insert.jmx -Jthread_group_postfix=medium -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+jmeter -n -t insert.jmx -Jthread_group_postfix=high -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+
+jmeter -n -t update.jmx -Jthread_group_postfix=low -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+jmeter -n -t update.jmx -Jthread_group_postfix=medium -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+jmeter -n -t update.jmx -Jthread_group_postfix=high -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+
+jmeter -n -t select.jmx -Jthread_group_postfix=low -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+jmeter -n -t select.jmx -Jthread_group_postfix=medium -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+jmeter -n -t select.jmx -Jthread_group_postfix=high -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+
+jmeter -n -t delete.jmx -Jthread_group_postfix=low -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+jmeter -n -t delete.jmx -Jthread_group_postfix=medium -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
+jmeter -n -t delete.jmx -Jthread_group_postfix=high -Jramp_up_seconds=3 -Jnumber_of_iterations=3 -Jnumber_of_threads=4
