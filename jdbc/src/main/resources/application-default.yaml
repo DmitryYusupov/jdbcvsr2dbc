@@ -4,5 +4,12 @@ spring:
     url: jdbc:postgresql://localhost:5433/jdbc_vs_r2dbc
     username: test
     password: 111
+
+#    hikari:
+#      maximumPoolSize: 300
   jpa:
-    show-sql: false
+     show-sql: false
+server:
+  tomcat:
+    threads:
+      max: 40

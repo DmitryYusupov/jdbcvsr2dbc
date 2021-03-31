@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger
 class ApplicationRestController(
     private val countryService: CountryService,
     private val cityService: CityService
-    ) {
+) {
 
     private val counter = AtomicInteger(0)
 
@@ -25,7 +25,7 @@ class ApplicationRestController(
     }
 
     @PutMapping("/countries")
-    fun updateRandomCountry(): Mono<Country> {
+    fun updateRandomCountry(): Mono<Void> {
         return countryService.updateRandom()
     }
 
@@ -52,6 +52,11 @@ class ApplicationRestController(
     @PostMapping("/countries")
     fun createCountry(): Mono<Country> {
         return countryService.createCountry()
+    }
+
+    @GetMapping("/call_blocking")
+    fun callBlocking(): Mono<String> {
+        return countryService.callBlocking()
     }
 
 }

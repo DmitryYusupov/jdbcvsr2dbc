@@ -30,8 +30,8 @@ class ApplicationRestController(
     }
 
     @PutMapping("/countries")
-    fun updateRandomCountry(): Country {
-        return countryService.updateRandom()
+    fun updateRandomCountry() {
+        countryService.updateRandom()
     }
 
     @PostMapping("/countries_with_cities")
@@ -48,5 +48,21 @@ class ApplicationRestController(
     fun getCountries(@RequestParam("fetch_cities") fetchCities: Boolean): List<Country> {
         return countryService.findAllCountries()
     }
+
+    @GetMapping("/call_blocking")
+    fun callBlocking(): String {
+        return countryService.callBlocking()
+    }
+
+    /**
+     * CREATE OR REPLACE FUNCTION blocking_test() RETURNS text AS $$
+    BEGIN
+    PERFORM pg_sleep(2);
+    RETURN 'test';
+    END;
+    $$ LANGUAGE plpgsql;
+
+    select blocking_test();
+     */
 
 }

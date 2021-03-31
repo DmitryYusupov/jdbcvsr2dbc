@@ -69,7 +69,7 @@ class CountryService(
         }
     }
 
-    fun updateRandom(): Mono<Country> {
+    fun updateRandom2(): Mono<Country> {
         return countryRepository.getAllIds().collectList().flatMap {
             countryRepository.findById(it.random()).flatMap { country->
                 country.name = "Updated country name ${country.uid}"
@@ -82,5 +82,17 @@ class CountryService(
             }
         }
     }
+
+    fun updateRandom(): Mono<Void> {
+        return countryRepository.getAllIds().collectList().flatMap {
+            val countryIdRandom = it.random()
+            countryRepository.updateName("NewName", countryIdRandom)
+        }
+    }
+
+    fun callBlocking(): Mono<String> {
+        return countryRepository.callBlocking()
+    }
+
 
 }

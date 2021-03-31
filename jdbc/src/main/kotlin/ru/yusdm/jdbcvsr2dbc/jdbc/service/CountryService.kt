@@ -18,7 +18,7 @@ class CountryService(
     }
 
     fun getCountryById(countryId: UUID): Country {
-        val country =  countryRepository.findById(countryId).map {
+        val country = countryRepository.findById(countryId).map {
             it.cities?.size
             it
         }.get()
@@ -55,13 +55,23 @@ class CountryService(
         return country
     }
 
-    fun updateRandom(): Country {
+    fun updateRandom() {
+        val countryIds = countryRepository.getAllIds()
+        val countryIdToUpdate = countryIds.random()
+        countryRepository.updateName("Update Name", countryIdToUpdate)
+    }
+
+    fun updateRandom2(): Country {
         val countryIds = countryRepository.getAllIds()
         val countryIdToUpdate = countryIds.random()
         val countryToUpdate = countryRepository.findById(countryIdToUpdate).get()
         countryToUpdate.name = "Updated country name $countryIdToUpdate"
 
         return countryToUpdate
+    }
+
+    fun callBlocking(): String {
+        return countryRepository.callBlocking()
     }
 
 }

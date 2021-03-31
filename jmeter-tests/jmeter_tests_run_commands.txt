@@ -1,1 +1,1 @@
-jmeter -n -t insert.jmx -Jthread_group_postfix=low -Jramp_up_seconds=3 -Jnumber_of_threads=4 -Jnumber_of_iterations=3
+jmeter -n -t insert.jmx -Jramp_up_seconds=3 -Jnumber_of_threads=4 -Jnumber_of_iterations=3 -Jthread_group_postfix=low
