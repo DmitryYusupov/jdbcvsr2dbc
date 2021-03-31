@@ -20,8 +20,8 @@
   "editable": true,
   "gnetId": 4026,
   "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1617183758694,
+  "id": 2,
+  "iteration": 1617200112570,
   "links": [],
   "panels": [
     {
@@ -401,30 +401,6 @@
         },
         "overrides": [
           {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "r2dbc_get_all_countries_without_cities"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "graph": true,
-                  "legend": false,
-                  "tooltip": false
-                }
-              }
-            ]
-          },
-          {
             "matcher": {
               "id": "byName",
               "options": "banner"
@@ -447,7 +423,7 @@
         "x": 0,
         "y": 8
       },
-      "id": 23,
+      "id": 36,
       "interval": "[[send_interval]]s",
       "links": [],
       "options": {
@@ -480,10 +456,11 @@
               "type": "tag"
             }
           ],
+          "hide": false,
           "measurement": "jmeter",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"pct95.0\") FROM \"$measurement_name\" WHERE (\"statut\" = 'ok' AND \"application\" =~ /^$application$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
+          "query": "SELECT mean(\"hit\") FROM \"$measurement_name\" WHERE ((\"transaction\"=~ /$transaction$/ OR \"transaction\"=~ /^$transaction_2$/) AND (\"application\" =~ /^$application$/)) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -514,7 +491,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Transactions Response Times (95th pct)",
+      "title": "Server hits per second",
       "type": "timeseries"
     },
     {
@@ -585,7 +562,7 @@
         "x": 0,
         "y": 15
       },
-      "id": 36,
+      "id": 42,
       "interval": "[[send_interval]]s",
       "links": [],
       "options": {
@@ -621,7 +598,7 @@
           "measurement": "jmeter",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"avg\") FROM \"$measurement_name\" WHERE (\"statut\" = 'ok' AND \"application\" =~ /^$application$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
+          "query": "SELECT mean(\"count\") FROM \"$measurement_name\" WHERE (\"statut\" = 'ok' AND \"application\" =~ /^$application$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -652,7 +629,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Transactions Response Times (Avg)",
+      "title": "AVG OK requests number",
       "type": "timeseries"
     },
     {
@@ -699,23 +676,7 @@
           },
           "unit": "ms"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "banner"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#508642",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 7,
@@ -729,21 +690,15 @@
       "options": {
         "graph": {},
         "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max",
-            "min",
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "right"
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
         },
         "tooltipOptions": {
           "mode": "single"
         }
       },
-      "pluginVersion": "7.5.0",
+      "pluginVersion": "7.5.2",
       "targets": [
         {
           "alias": "$tag_transaction",
@@ -759,7 +714,7 @@
           "measurement": "jmeter",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"max\") FROM \"$measurement_name\" WHERE (\"statut\" = 'ok' AND \"application\" =~ /^$application$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
+          "query": "SELECT mean(\"avg\") FROM \"$measurement_name\" WHERE (\"statut\" = 'ok' AND \"application\" =~ /^$application$/) AND $timeFilter GROUP BY \"transaction\", time($__interval) fill(null)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -790,7 +745,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Transactions Response Times (Max)",
+      "title": "Avg Ok Response time",
       "type": "timeseries"
     },
     {
@@ -859,7 +814,7 @@
           "mode": "single"
         }
       },
-      "pluginVersion": "7.5.0",
+      "pluginVersion": "7.5.2",
       "targets": [
         {
           "alias": "Req / s ($transaction)",
@@ -875,7 +830,7 @@
           "measurement": "jmeter",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"count\") / $send_interval FROM \"$measurement_name\" WHERE (\"transaction\" =~ /^$transaction$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
+          "query": "SELECT mean(\"count\") / $send_interval FROM \"$measurement_name\" WHERE (\"transaction\" =~ /^$transaction$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -928,7 +883,7 @@
           "measurement": "jmeter",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"count\") / $send_interval FROM \"$measurement_name\" WHERE (\"transaction\" =~ /^$transaction_2$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
+          "query": "SELECT mean(\"count\") / $send_interval FROM \"$measurement_name\" WHERE (\"transaction\" =~ /^$transaction_2$/ AND \"statut\" = 'ok') AND $timeFilter GROUP BY time($__interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -969,7 +924,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Throughput",
+      "title": "Median Throughput For Ok response",
       "type": "timeseries"
     },
     {
@@ -2113,10 +2068,9 @@
       {
         "allValue": null,
         "current": {
-          "isNone": true,
-          "selected": false,
-          "text": "None",
-          "value": ""
+          "selected": true,
+          "text": "app_insert",
+          "value": "app_insert"
         },
         "datasource": "$data_source",
         "definition": "",
@@ -2142,10 +2096,9 @@
       {
         "allValue": null,
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "jdbc_insert",
+          "value": "jdbc_insert"
         },
         "datasource": "$data_source",
         "definition": "",
@@ -2171,10 +2124,9 @@
       {
         "allValue": null,
         "current": {
-          "isNone": true,
-          "selected": false,
-          "text": "None",
-          "value": ""
+          "selected": true,
+          "text": "r2dbc_insert",
+          "value": "r2dbc_insert"
         },
         "datasource": "$data_source",
         "definition": "",
@@ -2220,7 +2172,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
