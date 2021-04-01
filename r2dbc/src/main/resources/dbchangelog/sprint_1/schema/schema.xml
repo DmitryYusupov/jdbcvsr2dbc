@@ -41,4 +41,16 @@
                                  referencedTableSchemaName="${schema}"
         />
     </changeSet>
+
+    <changeSet id="create_blocikng_function" author="dyusupov">
+    <createProcedure schemaName="${schema}">
+        CREATE OR REPLACE FUNCTION blocking_test()
+        RETURNS text AS $$
+        BEGIN
+        PERFORM pg_sleep(2);
+        RETURN 'test';
+        END;
+        $$ LANGUAGE plpgsql;
+    </createProcedure>
+    </changeSet>
 </databaseChangeLog>

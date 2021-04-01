@@ -1,5 +1,7 @@
 package ru.yusdm.jdbcvsr2dbc.jdbc.api
 
+import io.micrometer.core.instrument.Counter
+import io.micrometer.core.instrument.MeterRegistry
 import org.springframework.web.bind.annotation.*
 import ru.yusdm.jdbcvsr2dbc.jdbc.domain.City
 import ru.yusdm.jdbcvsr2dbc.jdbc.domain.Country
@@ -11,58 +13,75 @@ import java.util.*
 @RequestMapping(value = ["/api"])
 class ApplicationRestController(
     private val countryService: CountryService,
-    private val cityService: CityService
+    private val cityService: CityService,
+    private val registry: MeterRegistry
 ) {
 
-    @GetMapping("/cities/{cityId}")
-    fun getCity(@PathVariable("cityId") cityId: UUID): City {
-        return cityService.getById(cityId)
+    private val getCountryByIdCounter: Counter
+    private val updateCountryCounter: Counter
+    private val deleteCountryCounter: Counter
+    private val getCityByIdCounter: Counter
+    private val getCountriesCounter: Counter
+    private val createCountryWithCitiesCounter: Counter
+    private val createCountryCounter: Counter
+    private val callBlockingCounter: Counter
+
+    init {
+        getCountryByIdCounter = Counter.builder("getCountryByIdCounterJDBC").register(registry)
+        updateCountryCounter = Counter.builder("updateCountryCounterJDBC").register(registry)
+        deleteCountryCounter = Counter.builder("deleteCountryCounterJDBC").register(registry)
+        getCityByIdCounter = Counter.builder("getCityByIdCounterJDBC").register(registry)
+        getCountriesCounter = Counter.builder("getCountriesCounterJDBC").register(registry)
+        createCountryWithCitiesCounter = Counter.builder("createCountryWithCitiesCounterJDBC").register(registry)
+        createCountryCounter = Counter.builder("createCountryCounterJDBC").register(registry)
+        callBlockingCounter = Counter.builder("callBlockingCounterJDBC").register(registry)
     }
 
     @GetMapping("/countries/{countryId}")
     fun getCountry(@PathVariable("countryId") countryId: UUID): Country {
+        getCountryByIdCounter.increment()
         return countryService.getCountryById(countryId)
     }
 
-    @DeleteMapping("/countries")
+    @GetMapping("/update_country")
+    fun updateRandomCountry() {
+        updateCountryCounter.increment()
+         countryService.updateRandom()
+    }
+
+    @GetMapping("/delete_country")
     fun deleteRandomCountry(): UUID {
+        deleteCountryCounter.increment()
         return countryService.deleteRandom()
     }
 
-    @PutMapping("/countries")
-    fun updateRandomCountry() {
-        countryService.updateRandom()
+    @GetMapping("/cities/{cityId}")
+    fun getCity(@PathVariable("cityId") cityId: UUID): City {
+        getCityByIdCounter.increment()
+        return cityService.getById(cityId)
     }
 
-    @PostMapping("/countries_with_cities")
+    @GetMapping("/getall_countries")
+    fun getCountries(@RequestParam("fetch_cities") fetchCities: Boolean): List<Country> {
+        getCountriesCounter.increment()
+        return countryService.findAllCountries()
+    }
+
+    @GetMapping("/create_country_with_cities")
     fun createCountryWithCities(): Country {
+        createCountryWithCitiesCounter.increment()
         return countryService.createCountryWithCities()
     }
 
-    @PostMapping("/countries")
+    @GetMapping("/create_country")
     fun createCountry(): Country {
+        createCountryCounter.increment()
         return countryService.createCountry()
-    }
-
-    @GetMapping("/countries")
-    fun getCountries(@RequestParam("fetch_cities") fetchCities: Boolean): List<Country> {
-        return countryService.findAllCountries()
     }
 
     @GetMapping("/call_blocking")
     fun callBlocking(): String {
+        callBlockingCounter.increment()
         return countryService.callBlocking()
     }
-
-    /**
-     * CREATE OR REPLACE FUNCTION blocking_test() RETURNS text AS $$
-    BEGIN
-    PERFORM pg_sleep(2);
-    RETURN 'test';
-    END;
-    $$ LANGUAGE plpgsql;
-
-    select blocking_test();
-     */
-
 }

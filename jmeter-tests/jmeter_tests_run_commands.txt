@@ -1,1 +1,8 @@
-jmeter -n -t insert.jmx -Jramp_up_seconds=3 -Jnumber_of_threads=4 -Jnumber_of_iterations=3 -Jthread_group_postfix=low
+jmeter -n -t insert_jdbc.jmx -Jramp_up_seconds=3 -Jnumber_of_threads=200 -Jnumber_of_iterations=100 -Jthread_group_postfix=low
+jmeter -n -t insert_r2dbc.jmx -Jramp_up_seconds=3 -Jnumber_of_threads=200 -Jnumber_of_iterations=100 -Jthread_group_postfix=low
+jmeter -n -t insert_both.jmx -Jramp_up_seconds=3 -Jnumber_of_threads=200 -Jnumber_of_iterations=100 -Jthread_group_postfix=low
+
+jmeter -n -t blocking_both.jmx -Jramp_up_seconds=3 -Jnumber_of_threads=1000 -Jnumber_of_iterations=100 -Jthread_group_postfix=low
+
+
+wrk -t20 -c10 -d2s http://127.0.0.1:8082/api/create_country
