@@ -17,4 +17,8 @@ interface CountryRepository: JpaRepository<Country, UUID> {
 
     @Query("select blocking_test()", nativeQuery = true)
     fun callBlocking(): String
+
+    @Modifying
+    @Query("DELETE FROM COUNTRY WHERE uid = :id", nativeQuery = true)
+    fun deleteByUid(@Param("id") id: UUID)
 }

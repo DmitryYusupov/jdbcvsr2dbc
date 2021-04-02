@@ -65,7 +65,7 @@ class ApplicationRestController(
     }
 
     @GetMapping("/getall_countries")
-    fun getCountries(@RequestParam("fetch_cities") fetchCities: Boolean): Flux<Country> {
+    fun getCountries(): Flux<Country> {
         getCountriesCounter.increment()
         return countryService.findAllCountries()
     }
@@ -78,12 +78,14 @@ class ApplicationRestController(
 
     @GetMapping("/create_country")
     fun createCountry(): Mono<Country> {
+       // println("create")
         createCountryCounter.increment()
         return countryService.createCountry()
     }
 
     @GetMapping("/call_blocking")
     fun callBlocking(): Mono<String> {
+        //println("Blocking")
         callBlockingCounter.increment()
         return countryService.callBlocking()
     }

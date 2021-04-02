@@ -9,7 +9,7 @@ spring:
 #      maximumPoolSize: 300
   jpa:
      show-sql: false
-server:
-  tomcat:
-    threads:
-      max: 40
+#server:
+#  tomcat:
+#    threads:
+#      max: 40

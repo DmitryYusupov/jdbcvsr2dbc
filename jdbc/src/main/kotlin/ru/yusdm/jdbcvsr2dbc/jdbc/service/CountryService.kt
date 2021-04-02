@@ -37,7 +37,7 @@ class CountryService(
     fun deleteRandom(): UUID {
         val countryIds = countryRepository.getAllIds()
         val countryToDelete = countryIds.random()
-        countryRepository.deleteById(countryToDelete)
+        countryRepository.deleteByUid(countryToDelete)
 
         return countryToDelete
     }

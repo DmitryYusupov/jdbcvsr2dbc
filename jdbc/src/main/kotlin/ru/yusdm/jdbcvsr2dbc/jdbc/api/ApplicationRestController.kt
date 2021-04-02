@@ -8,6 +8,7 @@ import ru.yusdm.jdbcvsr2dbc.jdbc.domain.Country
 import ru.yusdm.jdbcvsr2dbc.jdbc.service.CityService
 import ru.yusdm.jdbcvsr2dbc.jdbc.service.CountryService
 import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 
 @RestController
 @RequestMapping(value = ["/api"])
@@ -62,7 +63,7 @@ class ApplicationRestController(
     }
 
     @GetMapping("/getall_countries")
-    fun getCountries(@RequestParam("fetch_cities") fetchCities: Boolean): List<Country> {
+    fun getCountries(): List<Country> {
         getCountriesCounter.increment()
         return countryService.findAllCountries()
     }
@@ -75,12 +76,14 @@ class ApplicationRestController(
 
     @GetMapping("/create_country")
     fun createCountry(): Country {
+       // println("create")
         createCountryCounter.increment()
         return countryService.createCountry()
     }
 
     @GetMapping("/call_blocking")
     fun callBlocking(): String {
+       // println("Blocking")
         callBlockingCounter.increment()
         return countryService.callBlocking()
     }
