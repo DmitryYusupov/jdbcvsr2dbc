@@ -88,7 +88,7 @@
           <stringProp name="HTTPSampler.port">${jdbc_app_port}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api//call_blocking</stringProp>
+          <stringProp name="HTTPSampler.path">${request}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -304,7 +304,7 @@
           <stringProp name="HTTPSampler.port">${r2dbc_app_port}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/api//call_blocking</stringProp>
+          <stringProp name="HTTPSampler.path">${request}</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -494,6 +494,11 @@
           <elementProp name="request_name" elementType="Argument">
             <stringProp name="Argument.name">request_name</stringProp>
             <stringProp name="Argument.value">${__P(request_name,&quot;request_name&quot;)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="request" elementType="Argument">
+            <stringProp name="Argument.name">request</stringProp>
+            <stringProp name="Argument.value">${__P(request,&quot;request&quot;)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
