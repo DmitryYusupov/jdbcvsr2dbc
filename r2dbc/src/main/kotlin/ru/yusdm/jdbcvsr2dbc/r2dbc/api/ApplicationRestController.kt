@@ -79,14 +79,14 @@ class ApplicationRestController(
     @GetMapping("/create_country")
     fun createCountry(): Mono<Country> {
        // println("create")
-        createCountryCounter.increment()
+        //createCountryCounter.increment()
         return countryService.createCountry()
     }
 
     @GetMapping("/call_blocking")
     fun callBlocking(): Mono<String> {
         //println("Blocking")
-        callBlockingCounter.increment()
+      //  callBlockingCounter.increment()
         return countryService.callBlocking()
     }
 

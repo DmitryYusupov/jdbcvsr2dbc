@@ -1,1 +1,1 @@
-jmeter -n -t universal_test.jmx -Jrequest_name=insert -Jrequest=/api/create_country -Jramp_up_seconds=3 -Jnumber_of_threads=1000 -Jnumber_of_iterations=100 -Jthread_group_postfix=test -Japplication=jdbc_vs_r2dbc
+jmeter -n -t universal_test.jmx -Jrequest_name=insert -Jrequest=/api/create_country -Jramp_up_seconds=3 -Jnumber_of_threads=100 -Jnumber_of_iterations=100 -Jthread_group_postfix=test -Japplication=jdbc_vs_r2dbc

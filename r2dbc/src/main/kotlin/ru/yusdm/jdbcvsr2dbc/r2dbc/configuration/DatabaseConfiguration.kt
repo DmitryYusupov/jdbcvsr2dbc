@@ -11,7 +11,7 @@ import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 import org.springframework.r2dbc.connection.R2dbcTransactionManager
 
-
+/*
 @Configuration
 @EnableR2dbcRepositories
 internal class DatabaseConfiguration : AbstractR2dbcConfiguration() {
@@ -22,7 +22,6 @@ internal class DatabaseConfiguration : AbstractR2dbcConfiguration() {
             ConnectionFactoryOptions.builder()
                 .option(ConnectionFactoryOptions.DRIVER, "pool")
                 .option(ConnectionFactoryOptions.PROTOCOL, "postgresql")
-              //  .option(PoolingConnectionFactoryProvider.MAX_SIZE, Integer.valueOf(100))
                 .option(ConnectionFactoryOptions.HOST, "localhost")
                 .option(ConnectionFactoryOptions.PORT, 5434)
                 .option(ConnectionFactoryOptions.USER, "test")
@@ -37,4 +36,4 @@ internal class DatabaseConfiguration : AbstractR2dbcConfiguration() {
         return  R2dbcTransactionManager(connectionFactory)
     }
 
-}
+}*/

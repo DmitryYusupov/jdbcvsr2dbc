@@ -77,14 +77,14 @@ class ApplicationRestController(
     @GetMapping("/create_country")
     fun createCountry(): Country {
        // println("create")
-        createCountryCounter.increment()
+        //createCountryCounter.increment()
         return countryService.createCountry()
     }
 
     @GetMapping("/call_blocking")
     fun callBlocking(): String {
        // println("Blocking")
-        callBlockingCounter.increment()
+       // callBlockingCounter.increment()
         return countryService.callBlocking()
     }
 }
