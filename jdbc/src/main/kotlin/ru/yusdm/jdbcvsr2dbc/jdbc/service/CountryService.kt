@@ -74,4 +74,10 @@ class CountryService(
         return countryRepository.callBlocking()
     }
 
+    fun getRandom(): Country {
+        val countryIds = countryRepository.getAllIds()
+        val countryIdToUpdate = countryIds.random()
+        return countryRepository.findById(countryIdToUpdate).get()
+    }
+
 }

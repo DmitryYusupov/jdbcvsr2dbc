@@ -62,6 +62,12 @@ class CountryService(
         return country
     }
 
+    fun getRandom(): Mono<Country> {
+        return countryRepository.getAllIds().collectList().flatMap {
+            countryRepository.findById(it.random())
+        }
+    }
+
     fun deleteRandom(): Mono<UUID> {
         return countryRepository.getAllIds().collectList().flatMap {
             val countryToDelete = it.random()

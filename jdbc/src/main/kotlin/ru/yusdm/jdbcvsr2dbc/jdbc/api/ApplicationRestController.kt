@@ -38,6 +38,12 @@ class ApplicationRestController(
         callBlockingCounter = Counter.builder("callBlockingCounterJDBC").register(registry)
     }
 
+    @GetMapping("/get_country")
+    fun getRandomCountry(): Country {
+        // updateCountryCounter.increment()
+        return countryService.getRandom()
+    }
+
     @GetMapping("/countries/{countryId}")
     fun getCountry(@PathVariable("countryId") countryId: UUID): Country {
        // getCountryByIdCounter.increment()

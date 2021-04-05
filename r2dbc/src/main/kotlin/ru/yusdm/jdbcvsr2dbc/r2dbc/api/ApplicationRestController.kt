@@ -52,6 +52,12 @@ class ApplicationRestController(
         return countryService.updateRandom()
     }
 
+    @GetMapping("/get_country")
+    fun getRandomCountry(): Mono<Country> {
+       // updateCountryCounter.increment()
+        return countryService.getRandom()
+    }
+
     @GetMapping("/delete_country")
     fun deleteRandomCountry(): Mono<UUID> {
      //   deleteCountryCounter.increment()
