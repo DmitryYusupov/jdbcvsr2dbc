@@ -24,6 +24,11 @@ class ApplicationRestController(
         return countryService.getCountryById(countryId)
     }
 
+    @GetMapping("/get_country")
+    suspend fun getRandomCountry(): Country? {
+        return countryService.getRandomCountry()
+    }
+
     @GetMapping("/update_country")
     suspend fun updateRandomCountry() {
         countryService.updateRandom()
