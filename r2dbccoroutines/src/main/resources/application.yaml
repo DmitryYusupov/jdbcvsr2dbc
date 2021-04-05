@@ -1,0 +1,30 @@
+spring:
+  liquibase:
+    change-log: dbchangelog/db.changelog-master.xml
+    enabled: false
+server:
+  port: 8082
+
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
+
+#logging:
+#  level:
+#    io:
+#      r2dbc:
+#        h2:
+#          H2Connection: DEBUG
+#logging:
+#  level:
+#    io:
+#      r2dbc:
+#        h2: WARN

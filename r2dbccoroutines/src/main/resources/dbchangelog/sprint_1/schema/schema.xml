@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="install_extension" author="dyusupov" dbms="postgresql">
+        <sql dbms="postgresql">CREATE EXTENSION IF NOT EXISTS "uuid-ossp";</sql>
+    </changeSet>
+
+    <changeSet id="create table country" author="dyusupov">
+        <createTable tableName="country" schemaName="${schema}">
+            <column name="UID" type="UUID">
+                <constraints primaryKeyName="country_pkey" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create table city" author="dyusupov">
+        <createTable tableName="city" schemaName="${schema}">
+            <column name="UID" type="UUID">
+                <constraints primaryKeyName="city_pkey" primaryKey="true" nullable="false"/>
+            </column>
+            <column name="COUNTRY_UID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_fk_city_country_id" author="dyusupov">
+        <addForeignKeyConstraint baseColumnNames="COUNTRY_UID" baseTableName="city"
+                                 constraintName="fk_city_country_id" deferrable="false" initiallyDeferred="false"
+                                 onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="UID"
+                                 referencedTableName="country"
+                                 baseTableSchemaName="${schema}"
+                                 referencedTableSchemaName="${schema}"
+        />
+    </changeSet>
+
+    <changeSet id="create_blocikng_function" author="dyusupov" dbms="postgresql">
+    <createProcedure schemaName="${schema}">
+        CREATE OR REPLACE FUNCTION blocking_test()
+        RETURNS text AS $$
+        BEGIN
+        PERFORM pg_sleep(2);
+        RETURN 'test';
+        END;
+        $$ LANGUAGE plpgsql;
+    </createProcedure>
+    </changeSet>
+</databaseChangeLog>

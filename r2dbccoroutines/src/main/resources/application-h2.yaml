@@ -1,0 +1,22 @@
+spring:
+  liquibase:
+    password:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    user: sa
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb?options=DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+
+logging:
+  level:
+    io:
+      r2dbc:
+        h2:
+          H2Connection: DEBUG
+#logging:
+#  level:
+#    io:
+#      r2dbc:
+#        h2: WARN
