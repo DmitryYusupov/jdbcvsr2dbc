@@ -1,11 +1,11 @@
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5433/jdbc_vs_r2dbc
-    username: test
-    password: 111
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://PDB-IO-LCSQL-1;database=JdbcTest;
+    password: Passw0rd
+    username: sa
 
-#    hikari:
+  #    hikari:
 #      maximumPoolSize: 300
   jpa:
      show-sql: false
