@@ -12,6 +12,6 @@
     <property name="uuid_function" value="RANDOM_UUID()" dbms="h2"/>
     <property name="now_utc" value="(now() at time zone 'UTC')" dbms="postgresql"/>
     <property name="now_utc" value="SYSDATE" dbms="h2"/>
-    <property name="schema" value="public" dbms="postgresql"/>
+    <property name="schema" value="public" dbms="postgresql,h2"/>
     <property name="schema" value="dbo" dbms="mssql"/>
 </databaseChangeLog>

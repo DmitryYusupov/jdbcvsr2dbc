@@ -1,4 +1,4 @@
-package ru.yusdm.jdbcvsr2dbc.r2dbc.configuration
+package ru.yusdm.jdbcvsr2dbc.coroutines.configuration
 
 import com.zaxxer.hikari.HikariDataSource
 import liquibase.Contexts
