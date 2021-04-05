@@ -42,7 +42,7 @@ class ApplicationRestController(
 
     @GetMapping("/countries/{countryId}")
     fun getCountry(@PathVariable("countryId") countryId: UUID): Mono<Country> {
-        getCityByIdCounter.increment()
+       // getCityByIdCounter.increment()
         return countryService.getCountryById(countryId)
     }
 
@@ -54,25 +54,25 @@ class ApplicationRestController(
 
     @GetMapping("/delete_country")
     fun deleteRandomCountry(): Mono<UUID> {
-        deleteCountryCounter.increment()
+     //   deleteCountryCounter.increment()
         return countryService.deleteRandom()
     }
 
     @GetMapping("/cities/{cityId}")
     fun getCity(@PathVariable("cityId") cityId: UUID): Mono<City> {
-        getCityByIdCounter.increment()
+      //  getCityByIdCounter.increment()
         return cityService.getById(cityId)
     }
 
     @GetMapping("/getall_countries")
     fun getCountries(): Flux<Country> {
-        getCountriesCounter.increment()
+      //  getCountriesCounter.increment()
         return countryService.findAllCountries()
     }
 
     @GetMapping("/create_country_with_cities")
     fun createCountryWithCities(): Mono<Country> {
-        createCountryCounter.increment()
+     //   createCountryCounter.increment()
         return countryService.createCountryWithCities()
     }
 

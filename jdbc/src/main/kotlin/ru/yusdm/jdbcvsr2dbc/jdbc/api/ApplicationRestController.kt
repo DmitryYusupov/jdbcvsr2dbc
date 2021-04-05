@@ -40,7 +40,7 @@ class ApplicationRestController(
 
     @GetMapping("/countries/{countryId}")
     fun getCountry(@PathVariable("countryId") countryId: UUID): Country {
-        getCountryByIdCounter.increment()
+       // getCountryByIdCounter.increment()
         return countryService.getCountryById(countryId)
     }
 
@@ -52,25 +52,25 @@ class ApplicationRestController(
 
     @GetMapping("/delete_country")
     fun deleteRandomCountry(): UUID {
-        deleteCountryCounter.increment()
+    //    deleteCountryCounter.increment()
         return countryService.deleteRandom()
     }
 
     @GetMapping("/cities/{cityId}")
     fun getCity(@PathVariable("cityId") cityId: UUID): City {
-        getCityByIdCounter.increment()
+       // getCityByIdCounter.increment()
         return cityService.getById(cityId)
     }
 
     @GetMapping("/getall_countries")
     fun getCountries(): List<Country> {
-        getCountriesCounter.increment()
+       // getCountriesCounter.increment()
         return countryService.findAllCountries()
     }
 
     @GetMapping("/create_country_with_cities")
     fun createCountryWithCities(): Country {
-        createCountryWithCitiesCounter.increment()
+      //  createCountryWithCitiesCounter.increment()
         return countryService.createCountryWithCities()
     }
 

@@ -1,11 +1,10 @@
 spring:
   liquibase:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5434/jdbc_vs_r2dbc
-    user: test
-    password: 111
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://PDB-IO-LCSQL-1;database=R2dbcTest;
+    user: sa
+    password: Passw0rd
   r2dbc:
-    #url: r2dbc:pool:postgresql://localhost:5434/jdbc_vs_r2dbc
-    url: r2dbc:postgresql://localhost:5434/jdbc_vs_r2dbc
-    username: test
-    password: 111
+    url: r2dbc:sqlserver://PDB-IO-LCSQL-1/R2dbcTest
+    username: sa
+    password: Passw0rd
