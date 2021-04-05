@@ -48,7 +48,7 @@ class ApplicationRestController(
 
     @GetMapping("/update_country")
     fun updateRandomCountry(): Mono<Void> {
-        updateCountryCounter.increment()
+       // updateCountryCounter.increment()
         return countryService.updateRandom()
     }
 

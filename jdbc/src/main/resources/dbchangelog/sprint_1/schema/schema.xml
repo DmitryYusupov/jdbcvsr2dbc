@@ -42,7 +42,7 @@
         />
     </changeSet>
 
-    <changeSet id="create_blocikng_function" author="dyusupov">
+    <changeSet id="create_blocikng_function" author="dyusupov" dbms="postgresql">
         <createProcedure schemaName="${schema}">
             CREATE OR REPLACE FUNCTION blocking_test()
             RETURNS text AS $$

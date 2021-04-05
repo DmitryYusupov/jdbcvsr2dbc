@@ -18,9 +18,13 @@ dependencies {
     implementation("com.zaxxer:HikariCP:3.4.5")
 
     runtimeOnly("org.postgresql:postgresql")
-    implementation("io.r2dbc:r2dbc-postgresql")
-    runtimeOnly("io.r2dbc:r2dbc-h2")
     runtimeOnly("com.h2database:h2")
+    runtimeOnly("com.microsoft.sqlserver:mssql-jdbc")
+
+    runtimeOnly("io.r2dbc:r2dbc-postgresql")
+    runtimeOnly("io.r2dbc:r2dbc-h2")
+    runtimeOnly("io.r2dbc:r2dbc-mssql")
+
 
     testImplementation("org.springframework.boot", "spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

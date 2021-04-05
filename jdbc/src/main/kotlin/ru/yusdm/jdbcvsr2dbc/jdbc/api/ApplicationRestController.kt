@@ -46,7 +46,7 @@ class ApplicationRestController(
 
     @GetMapping("/update_country")
     fun updateRandomCountry() {
-        updateCountryCounter.increment()
+       // updateCountryCounter.increment()
          countryService.updateRandom()
     }
 
