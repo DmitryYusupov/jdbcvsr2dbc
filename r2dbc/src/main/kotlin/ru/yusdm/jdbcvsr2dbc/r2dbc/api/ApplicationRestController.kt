@@ -28,6 +28,7 @@ class ApplicationRestController(
     private val createCountryWithCitiesCounter: Counter
     private val createCountryCounter: Counter
     private val callBlockingCounter: Counter
+    private var countryIds = listOf<UUID>()
 
     init {
         getCountryByIdCounter = Counter.builder("getCountryByIdCounterR2DBC").register(registry)
@@ -40,15 +41,20 @@ class ApplicationRestController(
         callBlockingCounter = Counter.builder("callBlockingCounterR2DBC").register(registry)
     }
 
+    @GetMapping("/set_all_country_ids")
+    fun getAllCountryIds() {
+        countryIds = countryService.getAllIds()
+    }
+
     @GetMapping("/countries/{countryId}")
     fun getCountry(@PathVariable("countryId") countryId: UUID): Mono<Country> {
-       // getCityByIdCounter.increment()
+        // getCityByIdCounter.increment()
         return countryService.getCountryById(countryId)
     }
 
     @GetMapping("/update_country")
     fun updateRandomCountry(): Mono<Void> {
-       // updateCountryCounter.increment()
+        // updateCountryCounter.increment()
         return countryService.updateRandom()
     }
 
@@ -57,15 +63,20 @@ class ApplicationRestController(
         return countryService.updateRandomSelectedRow()
     }
 
+    @GetMapping("/update_country_selecting_row_from_memory")
+    fun updateCountrySelectingRandomRowFromMemory(): Mono<Void> {
+        return countryService.updateRandomSelectedFromMemoryRow(countryIds)
+    }
+
     @GetMapping("/get_country")
     fun getRandomCountry(): Mono<Country> {
-       // updateCountryCounter.increment()
+        // updateCountryCounter.increment()
         return countryService.getRandom()
     }
 
     @GetMapping("/delete_country")
     fun deleteRandomCountry(): Mono<UUID> {
-     //   deleteCountryCounter.increment()
+        //   deleteCountryCounter.increment()
         return countryService.deleteRandom()
     }
 
@@ -76,25 +87,25 @@ class ApplicationRestController(
 
     @GetMapping("/cities/{cityId}")
     fun getCity(@PathVariable("cityId") cityId: UUID): Mono<City> {
-      //  getCityByIdCounter.increment()
+        //  getCityByIdCounter.increment()
         return cityService.getById(cityId)
     }
 
     @GetMapping("/getall_countries")
     fun getCountries(): Flux<Country> {
-      //  getCountriesCounter.increment()
+        //  getCountriesCounter.increment()
         return countryService.findAllCountries()
     }
 
     @GetMapping("/create_country_with_cities")
     fun createCountryWithCities(): Mono<Country> {
-     //   createCountryCounter.increment()
+        //   createCountryCounter.increment()
         return countryService.createCountryWithCities()
     }
 
     @GetMapping("/create_country")
     fun createCountry(): Mono<Country> {
-       // println("create")
+        // println("create")
         //createCountryCounter.increment()
         return countryService.createCountry()
     }
@@ -102,7 +113,7 @@ class ApplicationRestController(
     @GetMapping("/call_blocking")
     fun callBlocking(): Mono<String> {
         //println("Blocking")
-      //  callBlockingCounter.increment()
+        //  callBlockingCounter.increment()
         return countryService.callBlocking()
     }
 

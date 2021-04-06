@@ -19,6 +19,13 @@ class ApplicationRestController(
     private val cityService: CityService,
 ) {
 
+    private var countryIds = listOf<UUID>()
+
+    @GetMapping("/set_all_country_ids")
+    fun getAllCountryIds() {
+        countryIds = countryService.getAllIds()
+    }
+
     @GetMapping("/countries/{countryId}")
     suspend fun getCountry(@PathVariable("countryId") countryId: UUID): Country? {
         return countryService.getCountryById(countryId)
@@ -37,6 +44,11 @@ class ApplicationRestController(
     @GetMapping("/update_country_selecting_random_row")
     suspend fun updateCountrySelectingRandomRow() {
         countryService.updateRandomSelectedRow()
+    }
+
+    @GetMapping("/update_country_selecting_row_from_memory")
+    suspend fun updateCountrySelectingRandomRowFromMemory() {
+        countryService.updateRandomSelectedFromMemoryRow(countryIds)
     }
 
     @GetMapping("/delete_country")

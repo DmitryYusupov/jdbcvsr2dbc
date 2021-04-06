@@ -26,6 +26,7 @@ class ApplicationRestController(
     private val createCountryWithCitiesCounter: Counter
     private val createCountryCounter: Counter
     private val callBlockingCounter: Counter
+    private var countryIds = listOf<UUID>()
 
     init {
         getCountryByIdCounter = Counter.builder("getCountryByIdCounterJDBC").register(registry)
@@ -36,6 +37,11 @@ class ApplicationRestController(
         createCountryWithCitiesCounter = Counter.builder("createCountryWithCitiesCounterJDBC").register(registry)
         createCountryCounter = Counter.builder("createCountryCounterJDBC").register(registry)
         callBlockingCounter = Counter.builder("callBlockingCounterJDBC").register(registry)
+    }
+
+    @GetMapping("/set_all_country_ids")
+    fun getAllCountryIds() {
+        countryIds = countryService.getAllIds()
     }
 
     @GetMapping("/get_country")
@@ -54,6 +60,11 @@ class ApplicationRestController(
     fun updateRandomCountry() {
        // updateCountryCounter.increment()
          countryService.updateRandom()
+    }
+
+    @GetMapping("/update_country_selecting_row_from_memory")
+    fun updateCountrySelectingRandomRowFromMemory() {
+         countryService.updateRandomSelectedFromMemoryRow(countryIds)
     }
 
     @GetMapping("/update_country_selecting_random_row")

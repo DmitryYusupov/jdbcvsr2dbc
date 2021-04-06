@@ -2,6 +2,7 @@ package ru.yusdm.jdbcvsr2dbc.coroutines.service
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.runBlocking
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import ru.yusdm.jdbcvsr2dbc.coroutines.domain.City
@@ -87,6 +88,16 @@ class CountryService(
         val ids = countryRepository.getAllIds().toList()
         val countryId = ids.random()
         return countryRepository.findById(countryId)
+    }
+
+    fun getAllIds(): List<UUID> {
+        return runBlocking {
+            countryRepository.getAllIds().toList()
+        }
+    }
+
+    suspend fun updateRandomSelectedFromMemoryRow(countryIds: List<UUID>) {
+        countryRepository.updateName("NewName", countryIds.random())
     }
 
 }

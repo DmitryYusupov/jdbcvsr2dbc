@@ -93,4 +93,12 @@ class CountryService(
         return countryRepository.findById(countryIdToUpdate).get()
     }
 
+    fun getAllIds(): List<UUID> {
+        return countryRepository.getAllIds()
+    }
+
+    fun updateRandomSelectedFromMemoryRow(countryIds: List<UUID>) {
+        countryRepository.updateName("NewName", countryIds.random())
+    }
+
 }

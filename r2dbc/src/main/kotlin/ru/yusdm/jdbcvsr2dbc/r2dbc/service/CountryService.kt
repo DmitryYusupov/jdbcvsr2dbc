@@ -112,5 +112,13 @@ class CountryService(
         return countryRepository.callBlocking()
     }
 
+    fun getAllIds(): List<UUID> {
+        return countryRepository.getAllIds().collectList().block()!!
+    }
+
+    fun updateRandomSelectedFromMemoryRow(countryIds: List<UUID>): Mono<Void> {
+        return countryRepository.updateName("NewName", countryIds.random())
+    }
+
 
 }
