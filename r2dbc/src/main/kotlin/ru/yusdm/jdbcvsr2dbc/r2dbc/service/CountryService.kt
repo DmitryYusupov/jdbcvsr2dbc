@@ -120,5 +120,9 @@ class CountryService(
         return countryRepository.updateName("NewName", countryIds.random())
     }
 
+    fun getRandomSelectedFromMemoryRow(countryIds: List<UUID>): Mono<Country> {
+        return countryRepository.findById(countryIds.random())
+    }
+
 
 }

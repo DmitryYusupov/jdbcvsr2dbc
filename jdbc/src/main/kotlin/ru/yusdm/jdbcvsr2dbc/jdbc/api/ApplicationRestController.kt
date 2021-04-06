@@ -40,14 +40,20 @@ class ApplicationRestController(
     }
 
     @GetMapping("/set_all_country_ids")
-    fun getAllCountryIds() {
+    fun setAllCountryIds(): Int {
         countryIds = countryService.getAllIds()
+        return countryIds.size
     }
 
     @GetMapping("/get_country")
     fun getRandomCountry(): Country {
         // updateCountryCounter.increment()
         return countryService.getRandom()
+    }
+
+    @GetMapping("/get_country_selecting_row_from_memory")
+    fun getCountrySelectingRandomRowFromMemory() : Country {
+        return countryService.getRandomSelectedFromMemoryRow(countryIds)
     }
 
     @GetMapping("/countries/{countryId}")

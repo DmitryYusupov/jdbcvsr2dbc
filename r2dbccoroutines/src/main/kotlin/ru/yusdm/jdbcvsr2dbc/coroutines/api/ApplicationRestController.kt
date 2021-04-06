@@ -22,13 +22,19 @@ class ApplicationRestController(
     private var countryIds = listOf<UUID>()
 
     @GetMapping("/set_all_country_ids")
-    fun getAllCountryIds() {
+    fun setAllCountryIds() : Int {
         countryIds = countryService.getAllIds()
+        return countryIds.size
     }
 
     @GetMapping("/countries/{countryId}")
     suspend fun getCountry(@PathVariable("countryId") countryId: UUID): Country? {
         return countryService.getCountryById(countryId)
+    }
+
+    @GetMapping("/get_country_selecting_row_from_memory")
+    suspend fun getCountrySelectingRandomRowFromMemory() : Country {
+        return countryService.getRandomSelectedFromMemoryRow(countryIds)
     }
 
     @GetMapping("/get_country")
