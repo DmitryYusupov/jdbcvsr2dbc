@@ -75,6 +75,12 @@ class CountryService(
         }
     }
 
+    fun deleteRandomSelectedRow(): Mono<UUID> {
+        return countryRepository.getRandomRowUid().flatMap {
+            countryRepository.deleteById(it).thenReturn(it)
+        }
+    }
+
     fun updateRandom2(): Mono<Country> {
         return countryRepository.getAllIds().collectList().flatMap {
             countryRepository.findById(it.random()).flatMap { country->
@@ -93,6 +99,12 @@ class CountryService(
         return countryRepository.getAllIds().collectList().flatMap {
             val countryIdRandom = it.random()
             countryRepository.updateName("NewName", countryIdRandom)
+        }
+    }
+
+    fun updateRandomSelectedRow(): Mono<Void> {
+        return countryRepository.getRandomRowUid().flatMap {
+            countryRepository.updateName("NewName", it)
         }
     }
 

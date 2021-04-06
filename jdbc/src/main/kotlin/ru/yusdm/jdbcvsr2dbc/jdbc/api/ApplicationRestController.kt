@@ -56,10 +56,20 @@ class ApplicationRestController(
          countryService.updateRandom()
     }
 
+    @GetMapping("/update_country_selecting_random_row")
+    fun updateCountrySelectingRandomRow() {
+        countryService.updateRandomSelectedRow()
+    }
+
     @GetMapping("/delete_country")
     fun deleteRandomCountry(): UUID {
     //    deleteCountryCounter.increment()
         return countryService.deleteRandom()
+    }
+
+    @GetMapping("/delete_country_selecting_random_row")
+    fun deleteCountrySelectingRandomRow(): UUID {
+        return countryService.deleteRandomSelectedRow()
     }
 
     @GetMapping("/cities/{cityId}")

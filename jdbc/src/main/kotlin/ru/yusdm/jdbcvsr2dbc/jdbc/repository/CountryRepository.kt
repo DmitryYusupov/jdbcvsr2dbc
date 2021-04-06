@@ -21,4 +21,8 @@ interface CountryRepository: JpaRepository<Country, UUID> {
     @Modifying
     @Query("DELETE FROM COUNTRY WHERE uid = :id", nativeQuery = true)
     fun deleteByUid(@Param("id") id: UUID)
+
+    //SELECT c.UID FROM country c ORDER BY RANDOM() LIMIT 1
+    @Query("SELECT TOP 1 c.UID FROM country c ORDER BY NEWID()", nativeQuery = true)
+    fun getRandomRowUid(): UUID
 }

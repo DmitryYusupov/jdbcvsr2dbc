@@ -61,9 +61,21 @@ class CountryService(
         return countryToDelete
     }
 
+    suspend fun deleteRandomSelectedRow(): UUID {
+        val countryToDelete = countryRepository.getRandomRowUid()
+
+        countryRepository.deleteById(countryToDelete)
+        return countryToDelete
+    }
+
     suspend fun updateRandom() {
         val ids = countryRepository.getAllIds().toList()
         val countryToUpdate = ids.random()
+        countryRepository.updateName("NewName", countryToUpdate)
+    }
+
+    suspend fun updateRandomSelectedRow() {
+        val countryToUpdate = countryRepository.getRandomRowUid()
         countryRepository.updateName("NewName", countryToUpdate)
     }
 

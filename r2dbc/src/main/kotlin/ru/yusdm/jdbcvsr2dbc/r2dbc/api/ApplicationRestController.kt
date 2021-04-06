@@ -52,6 +52,11 @@ class ApplicationRestController(
         return countryService.updateRandom()
     }
 
+    @GetMapping("/update_country_selecting_random_row")
+    fun updateCountrySelectingRandomRow(): Mono<Void> {
+        return countryService.updateRandomSelectedRow()
+    }
+
     @GetMapping("/get_country")
     fun getRandomCountry(): Mono<Country> {
        // updateCountryCounter.increment()
@@ -62,6 +67,11 @@ class ApplicationRestController(
     fun deleteRandomCountry(): Mono<UUID> {
      //   deleteCountryCounter.increment()
         return countryService.deleteRandom()
+    }
+
+    @GetMapping("/delete_country_selecting_random_row")
+    fun deleteCountrySelectingRandomRow(): Mono<UUID> {
+        return countryService.deleteRandomSelectedRow()
     }
 
     @GetMapping("/cities/{cityId}")

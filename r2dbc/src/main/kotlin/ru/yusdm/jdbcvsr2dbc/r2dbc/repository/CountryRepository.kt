@@ -20,4 +20,8 @@ interface CountryRepository: ReactiveCrudRepository<Country, UUID> {
     @Query("select blocking_test()")
     fun callBlocking(): Mono<String>
 
+    //SELECT c.UID FROM country c ORDER BY RANDOM() LIMIT 1
+    @Query("SELECT TOP 1 c.UID FROM country c ORDER BY NEWID()")
+    fun getRandomRowUid(): Mono<UUID>
+
 }
