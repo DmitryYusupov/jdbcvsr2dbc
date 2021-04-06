@@ -112,8 +112,8 @@ class CountryService(
         return countryRepository.callBlocking()
     }
 
-    fun getAllIds(): List<UUID> {
-        return countryRepository.getAllIds().collectList().block()!!
+    fun getAllIds(): Flux<UUID> {
+        return countryRepository.getAllIds()
     }
 
     fun updateRandomSelectedFromMemoryRow(countryIds: List<UUID>): Mono<Void> {

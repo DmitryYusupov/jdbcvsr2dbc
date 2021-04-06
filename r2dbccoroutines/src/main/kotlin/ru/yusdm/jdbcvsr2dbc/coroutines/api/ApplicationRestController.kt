@@ -25,7 +25,6 @@ class ApplicationRestController(
 
     @GetMapping("/set_all_country_ids")
     fun setAllCountryIds() : Int {
-        println("asdasd")
         runBlocking {
             countryIds = countryService.getAllIds().toList()
         }

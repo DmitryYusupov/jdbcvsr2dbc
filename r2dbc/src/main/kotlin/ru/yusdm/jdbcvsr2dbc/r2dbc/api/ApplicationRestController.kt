@@ -42,9 +42,11 @@ class ApplicationRestController(
     }
 
     @GetMapping("/set_all_country_ids")
-    fun setAllCountryIds() : Int {
-        countryIds = countryService.getAllIds()
-        return countryIds.size
+    fun setAllCountryIds() =  {
+      /*  countryService.getAllIds().collectList().map {
+            println("AAA")
+            countryIds = it
+        }*/
     }
 
     @GetMapping("/countries/{countryId}")
