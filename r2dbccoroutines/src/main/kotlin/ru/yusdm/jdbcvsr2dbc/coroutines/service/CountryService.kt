@@ -12,12 +12,12 @@ import ru.yusdm.jdbcvsr2dbc.coroutines.repository.CountryRepository
 import java.util.*
 
 @Service
-@Transactional
 class CountryService(
     private val countryRepository: CountryRepository,
     private val cityRepository: CityRepository
 ) {
 
+    @Transactional
     suspend fun getCountryById(id: UUID): Country? {
         val country = countryRepository.findById(id)
         cityRepository.saveAll(cityRepository.findAllByCountryUID(id))
@@ -25,10 +25,12 @@ class CountryService(
         return country
     }
 
+    @Transactional
     fun findAllCountries(): Flow<Country> {
         return countryRepository.findAll()
     }
 
+    @Transactional
     suspend fun createCountryWithCities(): Country {
         val country = createNewCountry()
         val created = countryRepository.save(country)
@@ -36,6 +38,7 @@ class CountryService(
         return created
     }
 
+    @Transactional
     suspend fun createCountry(): Country {
         return countryRepository.save(Country("New Country"))
     }
@@ -54,6 +57,7 @@ class CountryService(
         return country
     }
 
+    @Transactional
     suspend fun deleteRandom(): UUID {
         val ids = countryRepository.getAllIds().toList()
         val countryToDelete = ids.random()
@@ -62,6 +66,7 @@ class CountryService(
         return countryToDelete
     }
 
+    @Transactional
     suspend fun deleteRandomSelectedRow(): UUID {
         val countryToDelete = countryRepository.getRandomRowUid()
 
@@ -69,37 +74,42 @@ class CountryService(
         return countryToDelete
     }
 
+    @Transactional
     suspend fun updateRandom() {
         val ids = countryRepository.getAllIds().toList()
         val countryToUpdate = ids.random()
         countryRepository.updateName("NewName", countryToUpdate)
     }
 
+    @Transactional
     suspend fun updateRandomSelectedRow() {
         val countryToUpdate = countryRepository.getRandomRowUid()
         countryRepository.updateName("NewName", countryToUpdate)
     }
 
+    @Transactional
     suspend fun callBlocking(): String {
         return countryRepository.callBlocking()
     }
 
+    @Transactional
     suspend fun getRandomCountry(): Country? {
         val ids = countryRepository.getAllIds().toList()
         val countryId = ids.random()
         return countryRepository.findById(countryId)
     }
 
-    fun getAllIds(): List<UUID> {
-        return runBlocking {
-            countryRepository.getAllIds().toList()
-        }
+    @Transactional
+    fun getAllIds(): Flow<UUID> {
+        return countryRepository.getAllIds()
     }
 
+    @Transactional
     suspend fun updateRandomSelectedFromMemoryRow(countryIds: List<UUID>) {
         countryRepository.updateName("NewName", countryIds.random())
     }
 
+    @Transactional
     suspend fun getRandomSelectedFromMemoryRow(countryIds: List<UUID>): Country {
         return countryRepository.findById(countryIds.random())!!
     }

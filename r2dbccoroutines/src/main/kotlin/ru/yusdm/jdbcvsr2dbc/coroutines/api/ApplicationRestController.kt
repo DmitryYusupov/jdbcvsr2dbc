@@ -1,6 +1,8 @@
 package ru.yusdm.jdbcvsr2dbc.coroutines.api
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.runBlocking
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -23,7 +25,10 @@ class ApplicationRestController(
 
     @GetMapping("/set_all_country_ids")
     fun setAllCountryIds() : Int {
-        countryIds = countryService.getAllIds()
+        println("asdasd")
+        runBlocking {
+            countryIds = countryService.getAllIds().toList()
+        }
         return countryIds.size
     }
 
