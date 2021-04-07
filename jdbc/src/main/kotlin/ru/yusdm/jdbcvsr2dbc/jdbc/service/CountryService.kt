@@ -34,6 +34,10 @@ class CountryService(
         return countryRepository.save(Country("New Country", null))
     }
 
+    fun createCountryCallingBlockingFunction(): Country {
+        return countryRepository.save(Country(countryRepository.callBlocking(), null))
+    }
+
     fun deleteRandom(): UUID {
         val countryIds = countryRepository.getAllIds()
         val countryToDelete = countryIds.random()
@@ -62,7 +66,6 @@ class CountryService(
 
         return country
     }
-
     fun updateRandom() {
         val countryIds = countryRepository.getAllIds()
         val countryIdToUpdate = countryIds.random()
@@ -103,6 +106,10 @@ class CountryService(
 
     fun getRandomSelectedFromMemoryRow(countryIds: List<UUID>) : Country {
         return countryRepository.findById(countryIds.random()).get()
+    }
+
+    fun deleteRandomSelectedFromMemoryRow(countryIds: List<UUID>) {
+        countryRepository.deleteById(countryIds.random())
     }
 
 }

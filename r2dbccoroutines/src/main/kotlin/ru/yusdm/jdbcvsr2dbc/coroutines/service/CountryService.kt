@@ -40,6 +40,10 @@ class CountryService(
         return countryRepository.save(Country("New Country"))
     }
 
+    suspend fun createCountryCallingBlockingFunction(): Country {
+        return countryRepository.save(Country(countryRepository.callBlocking()))
+    }
+
     private fun createNewCountry(): Country {
         val country = Country("New Country")
         val countryId = country.id
@@ -100,6 +104,10 @@ class CountryService(
 
     suspend fun getRandomSelectedFromMemoryRow(countryIds: List<UUID>): Country {
         return countryRepository.findById(countryIds.random())!!
+    }
+
+    suspend fun deleteRandomSelectedFromMemoryRow(countryIds: List<UUID>) {
+        countryRepository.deleteById(countryIds.random())
     }
 
 }

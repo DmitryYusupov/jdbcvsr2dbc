@@ -16,7 +16,8 @@ interface CountryRepository: CoroutineCrudRepository<Country, UUID> {
     @Query("UPDATE COUNTRY SET name = :newName WHERE uid = :id")
     suspend fun updateName(@Param("newName") newName: String, @Param("id") id: UUID)
 
-    @Query("select blocking_test()")
+    //@Query("select blocking_test()")
+    @Query("select dbo.blocking_test()")
     suspend fun callBlocking(): String
 
     //SELECT c.UID FROM country c ORDER BY RANDOM() LIMIT 1

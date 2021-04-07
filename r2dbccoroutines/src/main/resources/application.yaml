@@ -21,8 +21,8 @@ management:
 #  level:
 #    io:
 #      r2dbc:
-#        h2:
-#          H2Connection: DEBUG
+#        mssql:
+#          MssqlConnection: DEBUG
 #logging:
 #  level:
 #    io:

@@ -53,4 +53,22 @@
         $$ LANGUAGE plpgsql;
     </createProcedure>
     </changeSet>
+
+    <changeSet id="create_blocikng_function" author="dyusupov" dbms="mssql">
+        <createProcedure schemaName="${schema}">
+            CREATE FUNCTION ${schema}.blocking_test ()
+            RETURNS VARCHAR(250)
+            AS BEGIN
+
+            declare @dtStart datetime=getutcdate()
+
+            <![CDATA[while datediff(second,@dtStart,getutcdate()) < 1
+            begin
+            set @dtStart = @dtStart
+            end
+
+            RETURN 'blocking_test'
+            END]]>
+        </createProcedure>
+    </changeSet>
 </databaseChangeLog>

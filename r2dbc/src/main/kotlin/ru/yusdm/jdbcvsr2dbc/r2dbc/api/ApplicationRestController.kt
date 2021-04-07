@@ -93,6 +93,11 @@ class ApplicationRestController(
         return countryService.deleteRandomSelectedRow()
     }
 
+    @GetMapping("/delete_country_selecting_row_from_memory")
+    fun deleteCountrySelectingRandomRowFromMemory(): Mono<Void> {
+        return countryService.deleteRandomSelectedFromMemoryRow(countryIds)
+    }
+
     @GetMapping("/cities/{cityId}")
     fun getCity(@PathVariable("cityId") cityId: UUID): Mono<City> {
         //  getCityByIdCounter.increment()
@@ -116,6 +121,13 @@ class ApplicationRestController(
         // println("create")
         //createCountryCounter.increment()
         return countryService.createCountry()
+    }
+
+    @GetMapping("/create_country_calling_blocking_function")
+    fun createCountryCallingBlockingFunction(): Mono<Country> {
+        // println("create")
+        //createCountryCounter.increment()
+        return countryService.createCountryCallingBlockingFunction()
     }
 
     @GetMapping("/call_blocking")

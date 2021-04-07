@@ -53,6 +53,7 @@ class ApplicationRestController(
 
     @GetMapping("/get_country_selecting_row_from_memory")
     fun getCountrySelectingRandomRowFromMemory() : Country {
+        //countryIds contains all country ids
         return countryService.getRandomSelectedFromMemoryRow(countryIds)
     }
 
@@ -84,6 +85,11 @@ class ApplicationRestController(
         return countryService.deleteRandom()
     }
 
+    @GetMapping("/delete_country_selecting_row_from_memory")
+    fun deleteCountrySelectingRandomRowFromMemory() {
+        countryService.deleteRandomSelectedFromMemoryRow(countryIds)
+    }
+
     @GetMapping("/delete_country_selecting_random_row")
     fun deleteCountrySelectingRandomRow(): UUID {
         return countryService.deleteRandomSelectedRow()
@@ -112,6 +118,11 @@ class ApplicationRestController(
        // println("create")
         //createCountryCounter.increment()
         return countryService.createCountry()
+    }
+
+    @GetMapping("/create_country_calling_blocking_function")
+    fun createCountryCallingBlockingFunction(): Country {
+        return countryService.createCountryCallingBlockingFunction()
     }
 
     @GetMapping("/call_blocking")

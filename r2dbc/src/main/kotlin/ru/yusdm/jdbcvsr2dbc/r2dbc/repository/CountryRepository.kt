@@ -17,7 +17,8 @@ interface CountryRepository: ReactiveCrudRepository<Country, UUID> {
     @Query("UPDATE COUNTRY SET name = :newName WHERE uid = :id")
     fun updateName(@Param("newName") newName: String, @Param("id") id: UUID): Mono<Void>
 
-    @Query("select blocking_test()")
+    //@Query("select blocking_test()")
+    @Query("select dbo.blocking_test()")
     fun callBlocking(): Mono<String>
 
     //SELECT c.UID FROM country c ORDER BY RANDOM() LIMIT 1

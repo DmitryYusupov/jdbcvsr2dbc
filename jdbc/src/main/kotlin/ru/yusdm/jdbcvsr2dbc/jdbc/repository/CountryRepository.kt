@@ -15,7 +15,8 @@ interface CountryRepository: JpaRepository<Country, UUID> {
     @Query("UPDATE COUNTRY SET name = :newName WHERE uid = :id", nativeQuery = true)
     fun updateName(@Param("newName") newName: String,@Param("id") id: UUID)
 
-    @Query("select blocking_test()", nativeQuery = true)
+    //@Query("select blocking_test()", nativeQuery = true)
+    @Query("select dbo.blocking_test()", nativeQuery = true)
     fun callBlocking(): String
 
     @Modifying

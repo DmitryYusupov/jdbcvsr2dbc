@@ -48,6 +48,12 @@ class CountryService(
         return countryRepository.save(Country("New Country"))
     }
 
+    fun createCountryCallingBlockingFunction(): Mono<Country> {
+        return countryRepository.callBlocking().flatMap {
+            countryRepository.save(Country(it))
+        }
+    }
+
     private fun createNewCountry(): Country {
         val country = Country("New Country")
         val countryId = country.id
@@ -122,6 +128,10 @@ class CountryService(
 
     fun getRandomSelectedFromMemoryRow(countryIds: List<UUID>): Mono<Country> {
         return countryRepository.findById(countryIds.random())
+    }
+
+    fun deleteRandomSelectedFromMemoryRow(countryIds: List<UUID>): Mono<Void> {
+        return countryRepository.deleteById(countryIds.random())
     }
 
 

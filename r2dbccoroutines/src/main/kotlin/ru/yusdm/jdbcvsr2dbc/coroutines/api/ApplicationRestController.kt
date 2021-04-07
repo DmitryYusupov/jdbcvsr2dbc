@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import reactor.core.publisher.Mono
 import ru.yusdm.jdbcvsr2dbc.coroutines.domain.City
 import ru.yusdm.jdbcvsr2dbc.coroutines.domain.Country
 import ru.yusdm.jdbcvsr2dbc.coroutines.service.CityService
@@ -38,6 +39,7 @@ class ApplicationRestController(
 
     @GetMapping("/get_country_selecting_row_from_memory")
     suspend fun getCountrySelectingRandomRowFromMemory() : Country {
+        //countryIds contains all ids
         return countryService.getRandomSelectedFromMemoryRow(countryIds)
     }
 
@@ -66,6 +68,11 @@ class ApplicationRestController(
         return countryService.deleteRandom()
     }
 
+    @GetMapping("/delete_country_selecting_row_from_memory")
+    suspend fun deleteCountrySelectingRandomRowFromMemory() {
+        countryService.deleteRandomSelectedFromMemoryRow(countryIds)
+    }
+
     @GetMapping("/delete_country_selecting_random_row")
     suspend fun deleteCountrySelectingRandomRow(): UUID {
         return countryService.deleteRandomSelectedRow()
@@ -89,6 +96,11 @@ class ApplicationRestController(
     @GetMapping("/create_country")
     suspend fun createCountry(): Country {
         return countryService.createCountry()
+    }
+
+    @GetMapping("/create_country_calling_blocking_function")
+    suspend fun createCountryCallingBlockingFunction(): Country {
+        return countryService.createCountryCallingBlockingFunction()
     }
 
     @GetMapping("/call_blocking")
